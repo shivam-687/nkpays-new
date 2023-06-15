@@ -69,6 +69,7 @@ const Nav = () => {
         onClose={toggleDrawer}
         direction='left'
         className='border border-primary backdrop-blur bg-white/30'
+          
       >
         <div className='py-10'>
           <MobileNav 

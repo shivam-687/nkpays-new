@@ -25,7 +25,7 @@ const MobileNav = ({
                     'flex w-full cursor-pointer px-4 py-2 mb-2 text-base rounded hover:bg-primary hover:text-primary-foreground justify-between capitalize items-center'
                 )}>
                     <span>{link.lable}</span>
-                    <span><ChevronRight className='w-2 h-2'/></span>
+                    <span><ChevronRight className='w-4 h-4'/></span>
                 </Link>
             })
         }

@@ -25,7 +25,7 @@ const DownloadAppSection = () => {
                     </div>
 
                     <div className='relative w-full pt-10 '>
-                        <div className="max-w-xs relative  md:absolute  p-5 z-30  -translate-y-1/2 top-1/2"><Image alt="" src={'/assets/images/app.png'} width={500} height={1000} /></div>
+                        <div className="max-w-xs relative mx-auto  md:absolute  p-5 z-30  -translate-y-1/2 top-1/2"><Image alt="" src={'/assets/images/app.png'} width={500} height={1000} /></div>
                         <div className='absolute max-w-sm w-full  z-20 top-0 left-0 translate-x-1/2 bg-center bg-no-repeat bg-contain aspect-square' style={{backgroundImage: `url(${'/assets/images/shape-2.png'})`}}>
                         </div>
                     </div>

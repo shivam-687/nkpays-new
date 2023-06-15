@@ -38,7 +38,7 @@ const WhyChooseUsCard = ({
     desc: string
 }) => {
     return (
-        <div className="rounded-xl backdrop-blur border border-primary/70 p-5 max-w-sm bg-white/25">
+        <div className="rounded-xl backdrop-blur border border-primary/70 p-5 max-w-full md:max-w-sm bg-white/25">
             <div className='mb-3 flex items-center justify-center'>
                 <div className='w-14 h-14 rounded-full inline-flex items-center justify-center shadow bg-white'>
                     <Check className='w-10 h-10 text-primary ' />
@@ -64,7 +64,7 @@ const WhyChooseUs = () => {
                         <p>{` At NKPays, we stand out from the competition for several compelling reasons. Our commitment to excellence and customer satisfaction sets us apart as the preferred choice for integrated services.`}</p>
                     </div>
 
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-3 relative mt-16'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-3 relative mt-16 justify-items-center'>
                         {
                             wcuContent.map(ct => {
                                 return <WhyChooseUsCard {...ct} key={nanoid()} />
