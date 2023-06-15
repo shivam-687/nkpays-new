@@ -4,6 +4,7 @@ import { type AppType } from "next/app";
 import { api } from "@/utils/api";
 import "@/styles/globals.css";
 import 'swiper/swiper.css'
+import 'react-modern-drawer/dist/index.css'
 import AppLayout from "@/components/layout/AppLayout";
 import Footer from "@/components/shared/Footer";
 

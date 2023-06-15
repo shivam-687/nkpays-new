@@ -19,12 +19,14 @@ const Hero = () => {
     <section className="py-20 lg:py-0 lg:min-h-[100vh]  relative ">
       <div className='container grid grid-cols-1 lg:grid-cols-2 items-center'>
         <div className="content py-10 max-w-lg mx-auto">
-          <h1 className='text-3xl text-center md:text-5xl lg:text-5xl font-bold lg:text-left'>
-            {content.title}
-            <br></br>
-            <span className='bg-gradient-to-br text-transparent  bg-clip-text from-primary to-[#045ccc]'>{content.gradientTitle}</span>
-          </h1>
-          <p className='mt-2 text-left md:text-left hidden lg:block'>{content.desc}</p>
+          <div className='text-4xl text-center md:text-5xl lg:text-5xl font-bold lg:text-left'>
+            <h2>Empowering</h2>
+            <h2>Buisinesses With</h2>
+            <h2>Cutting-Edge</h2>
+            
+            <h2 className='bg-gradient-to-br text-transparent  bg-clip-text from-primary to-[#045ccc]'>{content.gradientTitle}</h2>
+          </div>
+          <p className='mt-2 text-center  md:text-left '>{content.desc}</p>
           <div className='flex gap-2 mt-5 justify-center lg:justify-start' >
             <LoginDropdown />
             <AppDownloadButton />

@@ -55,7 +55,7 @@ const List = ({
         }
     }, [])
     return (
-        <div className='max-w-sm rounded-lg shadow p-4'>
+        <div className='max-w-lg rounded-lg shadow p-4'>
             {
                 items.map(item => {
                     return <ListItem {...item} key={nanoid()} onItemClick={setItem} />
