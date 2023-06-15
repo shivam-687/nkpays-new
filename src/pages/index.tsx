@@ -19,13 +19,13 @@ const Home: NextPage = () => {
       </Head>
       <main>
         <Hero />
-        <Section sectionTitle="Our Services" titleClassnames="mb-10">
+        <Section className="bg-primary/20" sectionTitle="Our Services" titleClassnames="mb-10">
           <div className="px-4 container"><ServiceViwer /></div>
         </Section>
         <Section>
-          <div className="px-4 container mt-20"><WhyChooseUs /></div>
+          <div className="px-4 container mt-10"><WhyChooseUs /></div>
         </Section>
-        <Section className="px-4" sectionTitle="What Our Clients Said About NKPays">
+        <Section className="px-4 my-20" sectionTitle="What Our Clients Said About NKPays">
           <div className="container "><Testimonial /></div>
         </Section>
 
