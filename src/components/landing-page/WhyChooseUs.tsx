@@ -94,8 +94,15 @@ const WhyChooseUs = () => {
             <div className='col-auto md:col-span-2'>
                 <div className='max-w-2xl mx-auto'>
                     <div className='text-center mb-10'>
-                        <h2 className='text-3xl md:text-4xl font-bold mb-4'>Why Choose NKPays</h2>
-                        <p>{` At NKPays, we stand out from the competition for several compelling reasons. Our commitment to excellence and customer satisfaction sets us apart as the preferred choice for integrated services.`}</p>
+                        <div className="overflow-hidden">
+                            <Fade direction="up"><h2 className='text-3xl md:text-4xl font-bold mb-4'>Why Choose NKPays</h2></Fade>
+                        </div>
+                        <div className="overflow-hidden">
+                            <Fade direction="down">
+                            <p>{` At NKPays, we stand out from the competition for several compelling reasons. Our commitment to excellence and customer satisfaction sets us apart as the preferred choice for integrated services.`}</p>
+                            </Fade>
+                        </div>
+                        
                     </div>
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-3 relative mt-16 justify-items-center' ref={ref}>

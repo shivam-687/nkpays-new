@@ -84,8 +84,10 @@ const ServiceContent = ({
     return (
         <div className="grid grid-col-1 lg:grid-cols-2 gap-5 items-center  ">
             <div className=''>
+
                 <h3 className='text-3xl lg:text-4xl mb-3 font-bold' >{title}</h3>
                 <p className='mb-5'>{desc}</p>
+
 
                 {
                     link && <Link href={link} className=''>
@@ -187,7 +189,7 @@ const ServiceViwerContent = () => {
 
     return (
         <>
-            <Fade duration={1000}>
+            <Fade delay={300}>
                 {
                     items.map(it => {
                         return <div key={nanoid()}>{

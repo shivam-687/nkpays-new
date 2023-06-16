@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import React, { PropsWithChildren } from 'react'
+import { Fade } from 'react-awesome-reveal'
 
 export type SectionProps = {
     sectionTitle?: string,
@@ -10,7 +11,7 @@ export type SectionProps = {
 export const SectionTitle = ({ className, children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
     return (
         <h2 className={cn(
-            'text-4xl font-bold text-center mb-10',
+            'text-4xl font-bold text-center ',
             className
         )} {...props}>{children}</h2>
     )
@@ -32,7 +33,9 @@ const Section = ({
             )}>
 
             {
-                sectionTitle && <SectionTitle className={titleClassnames}>{sectionTitle}</SectionTitle>
+                sectionTitle && <div className='overflow-hidden mb-10'>
+                    <Fade delay={200} direction='up'><SectionTitle className={titleClassnames}>{sectionTitle}</SectionTitle></Fade>
+                </div>
             }
 
             {props.children}
