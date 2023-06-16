@@ -95,10 +95,10 @@ const WhyChooseUs = () => {
                 <div className='max-w-2xl mx-auto'>
                     <div className='text-center mb-10'>
                         <div className="overflow-hidden">
-                            <Fade direction="up"><h2 className='text-3xl md:text-4xl font-bold mb-4'>Why Choose NKPays</h2></Fade>
+                            <Fade triggerOnce direction="up"><h2 className='text-3xl md:text-4xl font-bold mb-4'>Why Choose NKPays</h2></Fade>
                         </div>
                         <div className="overflow-hidden">
-                            <Fade direction="down">
+                            <Fade triggerOnce direction="down">
                             <p>{` At NKPays, we stand out from the competition for several compelling reasons. Our commitment to excellence and customer satisfaction sets us apart as the preferred choice for integrated services.`}</p>
                             </Fade>
                         </div>
@@ -108,7 +108,7 @@ const WhyChooseUs = () => {
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-3 relative mt-16 justify-items-center' ref={ref}>
                         {
                             wcuContent.map((ct, index) => {
-                                return <Zoom delay={100 * (index+1)} key={nanoid()} ><WhyChooseUsCard {...ct} /></Zoom>
+                                return <Zoom triggerOnce delay={100 * (index+1)} key={nanoid()} ><WhyChooseUsCard {...ct} /></Zoom>
                             })
                         }
 
