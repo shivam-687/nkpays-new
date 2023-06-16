@@ -1,6 +1,8 @@
 import { nanoid } from 'nanoid'
-import React from 'react'
-import {Swiper, SwiperSlide} from 'swiper/react'
+import React, { useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay } from 'swiper'
+import ReactSimplyCarousel from 'react-simply-carousel';
 
 const partners = [
     {
@@ -31,14 +33,31 @@ const partners = [
         title: 'Videocon',
         logoUrl: '/assets/images/logos/partner-7.png'
     },
+    {
+        title: 'VI',
+        logoUrl: '/assets/images/logos/partner-4.png'
+    },
+    {
+        title: 'Dishtv',
+        logoUrl: '/assets/images/logos/partner-5.png'
+    },
+    {
+        title: 'Tataplay',
+        logoUrl: '/assets/images/logos/partner-6.png'
+    },
+    {
+        title: 'Videocon',
+        logoUrl: '/assets/images/logos/partner-7.png'
+    },
 ]
 
 const LogoCarousel = () => {
+    const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
-
-  return (
-    <div className=' container'>
-        <Swiper
+    return (
+        <div className=' container'>
+            <Swiper
+    
         slidesPerView={3}
         spaceBetween={20}
         breakpoints={{
@@ -46,6 +65,10 @@ const LogoCarousel = () => {
                 slidesPerView:5
             }
         }}
+        loop={true}
+        autoplay={{delay: 1000, disableOnInteraction: false}}
+        modules={[Autoplay]}
+        className="mySwiper"
         >
             {
                 partners.map(p => {
@@ -55,8 +78,12 @@ const LogoCarousel = () => {
                 })
             }
         </Swiper>
-    </div>
-  )
+
+            
+
+
+        </div>
+    )
 }
 
 export default LogoCarousel

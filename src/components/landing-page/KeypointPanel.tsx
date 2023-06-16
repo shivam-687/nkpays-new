@@ -1,3 +1,4 @@
+import { animated, useInView, useTrail } from '@react-spring/web'
 import { CloudLightning, Code } from 'lucide-react'
 import React from 'react'
 
@@ -27,6 +28,8 @@ const KeyPointCard = ({
     desc
 }: {icon: any, title: string, desc: string}) => {
 
+    
+
     return (
         <div className='p-2 max-w-xs'>
             <div className="flex items-center justify-center p-5" >
@@ -42,17 +45,21 @@ const KeyPointCard = ({
 }
 
 const KeypointPanel = () => {
+    const [parent, inView] = useInView()
+    const [trail] = useTrail(3, () => ({from: {opacity: 0, y: '50px'}, to: {opacity: 1, y: '0px'}}), [inView])
 
   return (
-    <div className='rounded-tl-3xl backdrop-blur bg-primary/10 mb-10 rounded-br-3xl border-primary shadow-xl shadow-primary/20 p-4 border grid grid-col-1 md:grid-cols-3 justify-items-center container mx-autos'>
+    <animated.div ref={parent} className=' overflow-hiddenrounded-tl-3xl backdrop-blur bg-primary/10 mb-10 rounded-br-3xl border-primary shadow-xl shadow-primary/20 p-4 border grid grid-col-1 md:grid-cols-3 justify-items-center container mx-autos'>
         {
             keypointContent.map((kp, index) => {
                 return (
-                    <KeyPointCard key={index} {...kp} />
+                    <animated.div style={trail[index]} key={index} >
+                        <KeyPointCard {...kp} />
+                    </animated.div>
                 )
             })
         }
-    </div>
+    </animated.div>
   )
 }
 

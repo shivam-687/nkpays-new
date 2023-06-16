@@ -1,8 +1,14 @@
 import React from 'react'
-import Section from '../shared/Section'
 import { Check, CheckIcon } from 'lucide-react'
 import Image from 'next/image'
 import { nanoid } from 'nanoid'
+import { useTrail, animated, useSpring, useInView } from '@react-spring/web'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { EffectFade, Navigation, Autoplay, EffectCube } from "swiper";
+import { Fade, Zoom } from 'react-awesome-reveal'
+import AppDownloadButton from '../shared/AppDownloadButton'
+import "swiper/css";
+import "swiper/css/effect-fade";
 
 const wcuContent = [
     {
@@ -37,8 +43,10 @@ const WhyChooseUsCard = ({
     title: string,
     desc: string
 }) => {
+
+
     return (
-        <div className="rounded-xl backdrop-blur border border-primary/70 p-5 max-w-full md:max-w-sm bg-white/25">
+        <div className="rounded-xl backdrop-blur border border-primary/70 p-5  md:max-w-sm bg-white/25">
             <div className='mb-3 flex items-center justify-center'>
                 <div className='w-14 h-14 rounded-full inline-flex items-center justify-center shadow bg-white'>
                     <Check className='w-10 h-10 text-primary ' />
@@ -53,7 +61,33 @@ const WhyChooseUsCard = ({
     )
 }
 
+
+const MobilePan = ({ imageUrl }: { imageUrl: string }) => {
+    return (
+        <div className='max-w-xs mx-auto lg:mx-0 relative'>
+            <Image alt="" src={imageUrl} width={500} height={1052} />
+            <Fade direction='down' className='absolute w-full bottom-0 left-0 flex justify-center'>
+                <div className='max-w-xs mx-auto rounded-xl border border-primary/60 backdrop-blur-md bg-white/30 flex items-center justify-center p-5 '>
+                    <AppDownloadButton />
+                </div>
+            </Fade>
+        </div>
+    )
+}
+
 const WhyChooseUs = () => {
+    const [ref, inView] = useInView()
+    const [trail, api] = useTrail(4, () => ({ delay: 2000, from: { opacity: 0, scale: '0.7' }, to: { opacity: 1, scale: '1' } }), [inView])
+
+    const appImages = [
+        '/assets/images/app.png',
+        '/assets/images/app.png',
+        '/assets/images/app.png',
+        '/assets/images/app.png',
+        '/assets/images/app.png',
+        '/assets/images/app.png',
+    ]
+
     return (
 
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
@@ -64,23 +98,43 @@ const WhyChooseUs = () => {
                         <p>{` At NKPays, we stand out from the competition for several compelling reasons. Our commitment to excellence and customer satisfaction sets us apart as the preferred choice for integrated services.`}</p>
                     </div>
 
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-3 relative mt-16 justify-items-center'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-3 relative mt-16 justify-items-center' ref={ref}>
                         {
-                            wcuContent.map(ct => {
-                                return <WhyChooseUsCard {...ct} key={nanoid()} />
+                            wcuContent.map((ct, index) => {
+                                return <Zoom delay={100 * (index+1)} key={nanoid()} ><WhyChooseUsCard {...ct} /></Zoom>
                             })
                         }
 
-                        <div className='absolute -top-10 -left-10 w-full h-full -z-10 bg-left-top bg-contain bg-no-repeat' style={{ backgroundImage: `url(/assets/images/shape-1.png)` }}>
+                        <animated.div className='absolute -top-10 -left-10 w-full h-full -z-10 bg-left-top bg-contain bg-no-repeat' style={{ backgroundImage: `url(/assets/images/shape-1.png)` }}>
                             {/* <div className='w-full h-full  bg-left bg-contain bg-no-repeat' style={{ backgroundImage: `url(/assets/images/shape-1.png)` }}></div> */}
-                        </div>
+                        </animated.div>
                     </div>
                 </div>
             </div>
             <div className=''>
-                <div className='max-w-xs mx-auto lg:mx-0'>
-                <Image alt=""  src="/assets/images/app.png" width={500} height={1052} />
-                </div>
+                <Swiper
+                    slidesPerView={1}
+                    centeredSlides={true}
+                    autoplay={{
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    }}
+                    loop
+                    navigation={false}
+                    effect='cube'
+                    cubeEffect={{shadow: false, slideShadows: false}}
+                    modules={[Autoplay, EffectCube]}
+                >
+
+                    {
+                        appImages.map(img => {
+                            return <SwiperSlide key={nanoid()}>
+                                 <MobilePan imageUrl={img} />
+                            </SwiperSlide>
+                        })
+                    }
+                    
+                </Swiper>
             </div>
         </div>
 

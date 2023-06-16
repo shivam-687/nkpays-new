@@ -1,6 +1,7 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { nanoid } from 'nanoid';
+import { Autoplay } from 'swiper';
 
 type TestimonialData = {
     avatarUrl?: string,
@@ -23,6 +24,16 @@ const testimonials = [
         name: "Lisa M.",
         desc: "As a small business owner, I rely on NKPays for my domestic money transfers and AEPS transactions. It has truly transformed my financial transactions.",
         avatarUrl: "https://randomuser.me/api/portraits/women/3.jpg",
+    },
+    {
+        name: "David H.",
+        desc: "NKPays has become my go-to platform for DTH recharges and general insurance. I highly recommend NKPays for their reliable services.",
+        avatarUrl: "https://randomuser.me/api/portraits/men/4.jpg",
+    },
+    {
+        name: "Emily S.",
+        desc: "I love using NKPays for all my bill payments. The platform is so convenient and user-friendly. It has saved me a lot of time and hassle.",
+        avatarUrl: "https://randomuser.me/api/portraits/women/5.jpg",
     },
     {
         name: "David H.",
@@ -61,6 +72,9 @@ const Testimonial = () => {
             <Swiper
             slidesPerView={1}
             spaceBetween={50}
+            modules={[Autoplay]}
+            autoplay={{delay: 3000}}
+            loop
             breakpoints={{
                 '768': {
                     slidesPerView: 3,

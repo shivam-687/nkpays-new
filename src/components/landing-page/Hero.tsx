@@ -3,6 +3,10 @@ import Image from 'next/image'
 import LoginDropdown from '../shared/LoginDropdown'
 import AppDownloadButton from '../shared/AppDownloadButton'
 import KeypointPanel from './KeypointPanel'
+import { nanoid } from 'nanoid'
+import TrailText from '../animated/TrailText'
+import { Fade, Zoom } from "react-awesome-reveal";
+import { animated, useSpring, useTrail } from '@react-spring/web'
 
 
 const content = {
@@ -10,35 +14,74 @@ const content = {
   gradientTitle: 'Integrated Solutions',
   desc: 'Streamline your operations, enhance efficiency, and unlock growth potential with our cutting-edge integrated solutions. Experience the transformative power of simplified processes and boost your business success today.',
   appUrl: '',
-
+  titleArray: [
+    { title: 'Empowering', type: 'simple' },
+    { title: 'Buisinesses With', type: 'simple' },
+    { title: 'Cutting-Edge', type: 'simple' },
+    { title: 'Integrated Solutions', type: 'gradient' }
+  ]
 }
 
 
 const Hero = () => {
+
+  const fadeRight = useSpring({
+    delay: 300,
+    from: { opacity: 0, x: 20},
+    to: { opacity: 1 , x:0},
+  })
+
+  const popTrail = useTrail(2 , {from: {opacity: 0, x:20}, to: {opacity:1, x:0}})
+
+  const blinkSpring = useSpring({
+    from: {opacity: 0, scale: '30%'},
+    to: {opacity: 1, scale: '100%'},
+    loop: true
+  })
+
   return (
     <section className="py-20 lg:py-0 lg:min-h-[100vh]  relative ">
       <div className='container grid grid-cols-1 lg:grid-cols-2 items-center'>
         <div className="content py-10 max-w-lg mx-auto">
-          <div className='text-4xl text-center md:text-5xl lg:text-5xl font-bold lg:text-left'>
-            <h2>Empowering</h2>
-            <h2>Buisinesses With</h2>
-            <h2>Cutting-Edge</h2>
-            
-            <h2 className='bg-gradient-to-br text-transparent  bg-clip-text from-primary to-[#045ccc]'>{content.gradientTitle}</h2>
+          <div className='text-4xl space-y-2 text-center md:text-5xl lg:text-5xl font-bold lg:text-left'>
+            {
+
+              <TrailText open={true}>
+                {
+                  content.titleArray.map(t => {
+                    return (
+                      <div key={nanoid()} >
+                        {
+                          t?.type === 'gradient'
+                            ?
+                            <h2 className='bg-gradient-to-br text-transparent  bg-clip-text from-primary to-[#045ccc]'>{t.title}</h2>
+                            :
+                            <h2 >{t.title}</h2>
+                        }
+                      </div>
+                    )
+                  })
+                }
+              </TrailText>
+            }
+            {/* <animated.h2 style={spring}>Empowering</animated.h2>
+            <animated.h2>Buisinesses With</animated.h2>
+            <animated.h2>Cutting-Edge</animated.h2>
+            <animated.h2 className='bg-gradient-to-br text-transparent  bg-clip-text from-primary to-[#045ccc]'>{content.gradientTitle}</animated.h2> */}
           </div>
-          <p className='mt-2 text-center  md:text-left '>{content.desc}</p>
+          <animated.p className='mt-2 text-center md:text-left' style={fadeRight}>{content.desc}</animated.p>
           <div className='flex gap-2 mt-5 justify-center lg:justify-start' >
-            <LoginDropdown />
-            <AppDownloadButton />
+            <animated.div style={popTrail[0]}><LoginDropdown /></animated.div>
+            <animated.div style={popTrail[1]}><AppDownloadButton /></animated.div>
+           
           </div>
         </div>
         <div className='relative '>
-          <Image src={'/assets/images/hero-img-2.png'} alt="Hero Image" width={800} height={800} />
+         <Fade triggerOnce delay={1000}> <Image src={'/assets/images/hero-img-2.png'} alt="Hero Image" width={800} height={800} /></Fade>
           <div className="absolute top-0 left w-full h-full flex items-center justify-center">
-            <div className='w-52 h-52 md:w-[500px] md:h-[500px] bg-primary/30 rounded-full  -z-20 p-7 lg:p-12'>
-              <div className='w-full h-full rounded-full bg-gradient-to-bl from-primary to-[#045ccc]'>
-              </div>
-            </div>
+            <Zoom triggerOnce delay={200}  className='w-52 h-52 md:w-[500px] md:h-[500px] bg-primary/30 rounded-full  -z-20 p-7 lg:p-12'>
+              <div className='w-full h-full rounded-full bg-gradient-to-bl from-primary -z-10 to-[#045ccc]'></div>
+            </Zoom>
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ import { nanoid } from 'nanoid';
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import { Fade } from 'react-awesome-reveal';
 
 // LIST ITEM
 
@@ -43,6 +44,9 @@ const List = ({
 }: { items: ServiceViwerItem[] }) => {
 
     const { currentActiveItem, setCurrentActiveItem } = useContext(ServiceViwerContext);
+    const [parent, enableAnimations] = useAutoAnimate({
+        duration: 300
+    })
 
     const setItem = (id: string) => {
         const ci = items.find(d => d.id === id);
@@ -172,9 +176,7 @@ const serviceItems: ServiceViwerItem[] = [
 
 const ServiceViwerContent = () => {
     const { currentActiveItem } = useContext(ServiceViwerContext)
-    const [parent, enableAnimations] = useAutoAnimate({
-        duration: 300
-    })
+
     const [items, setItems] = useState<ServiceViwerItem[]>([])
 
     useEffect(() => {
@@ -185,7 +187,7 @@ const ServiceViwerContent = () => {
 
     return (
         <>
-            <div ref={parent}>
+            <Fade duration={1000}>
                 {
                     items.map(it => {
                         return <div key={nanoid()}>{
@@ -193,7 +195,7 @@ const ServiceViwerContent = () => {
                         }</div>
                     })
                 }
-            </div>
+            </Fade>
         </>
     )
 }
