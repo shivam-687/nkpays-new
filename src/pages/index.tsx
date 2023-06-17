@@ -1,5 +1,7 @@
+import ContactSection from "@/components/landing-page/ContactSection";
 import Hero from "@/components/landing-page/Hero";
 import KeypointPanel from "@/components/landing-page/KeypointPanel";
+import Opportunities from "@/components/landing-page/Opportunities";
 import WhyChooseUs from "@/components/landing-page/WhyChooseUs";
 import DownloadAppSection from "@/components/shared/DownloadAppSection";
 import LogoCarousel from "@/components/shared/LogoCarousel";
@@ -19,11 +21,14 @@ const Home: NextPage = () => {
       </Head>
       <main>
         <Hero />
-        <Section className="bg-primary/20" sectionTitle="Our Services" titleClassnames="mb-10">
+        <Section className="bg-primary/20" sectionTitle="Our Services" titleClassnames="">
           <div className="px-4 container"><ServiceViwer /></div>
         </Section>
         <Section>
           <div className="px-4 container mt-10"><WhyChooseUs /></div>
+        </Section>
+        <Section>
+          <div className="px-4 container mt-10"><Opportunities /></div>
         </Section>
         <Section className="px-4 my-20" sectionTitle="What Our Clients Said About NKPays">
           <div className="container "><Testimonial /></div>
@@ -34,6 +39,8 @@ const Home: NextPage = () => {
         </div>
 
         <DownloadAppSection/>
+
+        <ContactSection/>
       </main>
     </>
   );
