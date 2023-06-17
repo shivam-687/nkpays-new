@@ -5,8 +5,40 @@ import { Button } from '../ui/button';
 import { useRouter } from 'next/router';
 import { cn } from '@/lib/utils';
 import Drawer from 'react-modern-drawer'
-import { MenuIcon } from 'lucide-react';
+import { ChevronDown, MenuIcon } from 'lucide-react';
 import MobileNav from './MobileNav';
+import LoginDropdown from './LoginDropdown';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import { nanoid } from 'nanoid';
+
+
+const NavLinkDropDown = ({ childs, children, lable }: PropsWithChildren<{ childs: { link: string, lable: string }[], lable?: string }>) => {
+  const router = useRouter();
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        {
+          children || <span className={cn('inline-flex gap-1 items-center cursor-pointer')}><span>{lable}</span> <ChevronDown className='text-primary w-4 h-4'/></span>
+        }
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        {
+          childs.map(child => {
+            return (
+              <DropdownMenuItem key={nanoid()}>
+                <Link className={cn(
+                  'hover:text-primary transition-all',
+                  { 'text-primary': router.asPath.startsWith(child.link) }
+                )} href={child.link}>{child.lable}</Link>
+              </DropdownMenuItem>
+            )
+          })
+        }
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
 
 
 const NavLink = ({ children, ...props }: PropsWithChildren<LinkProps>) => {
@@ -40,26 +72,33 @@ const Nav = () => {
 
 
         <div className="flex-grow justify-center gap-5 items-center hidden md:flex">
-          <div className="gap-4 hidden md:flex">
+          <div className="gap-10 hidden md:flex">
             <NavLink href={'/'}>Home</NavLink>
-            <NavLink href={'/service'}>Services</NavLink>
+            <NavLinkDropDown
+              lable='Services'
+              childs={[
+                { lable: 'Aeps Service', link: '/services/aadhar-enabled-payment-system' },
+                { lable: 'BBPS Service', link: '/services/bbps' },
+                { lable: 'DTH Reacharge', link: '/services/dth' },
+                { lable: 'Mobile Recharge', link: '/services/mobile' },
+                { lable: 'Travel Booking', link: '/services/travel' },
+                { lable: 'General Insurance', link: '/services/general' },
+                { lable: 'Domestice Money Transfer', link: '/services/dmt' },
+              ]} />
             <NavLink href={'/about'}>About Us</NavLink>
             <NavLink href={'/shop'}>Shop</NavLink>
             <NavLink href={'/contact'}>Contact</NavLink>
-
           </div>
         </div>
 
 
         <div className="flex gap-2 flex-grow-0 ">
           <div className='hidden md:flex'>
-            <Button>Login</Button>
+            <LoginDropdown />
           </div>
           <div className='flex md:hidden'>
             <Button size={'sm'} onClick={toggleDrawer} variant={'outline'}><MenuIcon /></Button>
-
           </div>
-
         </div>
       </div>
 
@@ -69,18 +108,18 @@ const Nav = () => {
         onClose={toggleDrawer}
         direction='left'
         className='border border-primary backdrop-blur bg-white/30'
-          
+
       >
         <div className='py-10'>
-          <MobileNav 
-          onLinkClick={toggleDrawer}
-          links={[
-            {link: '/', lable: 'Home'},
-            {link: '/services', lable: 'Services'},
-            {link: '/about', lable: 'About'},
-            {link: '/Contact', lable: 'Contact'},
-            {link: '/Shop', lable: 'Shop'},
-          ]}/>
+          <MobileNav
+            onLinkClick={toggleDrawer}
+            links={[
+              { link: '/', lable: 'Home' },
+              { link: '/services', lable: 'Services' },
+              { link: '/about', lable: 'About' },
+              { link: '/Contact', lable: 'Contact' },
+              { link: '/Shop', lable: 'Shop' },
+            ]} />
         </div>
       </Drawer>
 

@@ -7,7 +7,7 @@ import { Languages } from 'lucide-react'
 
 const ContactSection = () => {
     return (
-        <section className='px-4 py-12 bg-center bg-cover bg-no-repeat bg-primary/30 relative z-10' style={{ backgroundImage: `url(/assets/images/contact.jpg)` }}>
+        <section className='px-4 py-16 bg-center bg-cover bg-no-repeat bg-primary/30 relative z-10' style={{ backgroundImage: `url(/assets/images/contact.jpg)` }}>
             <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
             <div className=' grid grid-cols-1 md:grid-cols-3 items-center container mx-auto gap-10 z-40'>
                 <div><ContactForm /></div>

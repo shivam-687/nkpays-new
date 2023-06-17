@@ -33,10 +33,29 @@ const Section = ({
             )}>
 
             {
-                sectionTitle && <div className='overflow-hidden mb-10'>
-                    <Fade triggerOnce delay={200} direction='up'><SectionTitle className={titleClassnames}>{sectionTitle}</SectionTitle></Fade>
-                </div>
+                (sectionTitle || sectionDesc)
+                &&
+                <>
+                    {
+                        sectionTitle && <div className='overflow-hidden mb-3'>
+                            <Fade triggerOnce delay={200} direction='up'><SectionTitle className={titleClassnames}>{sectionTitle}</SectionTitle></Fade>
+                        </div>
+                    }
+
+                    {
+                        sectionDesc
+                        &&
+                        <div className='overflow-hidden flex text-gray-600  items-center  justify-center w-full'>
+                            <Fade triggerOnce direction='down' delay={100} className='max-w-lg'>
+                                <p className='text-center'>{sectionDesc}</p>
+                            </Fade>
+                        </div>
+                    }
+                </>
             }
+            <div className='w-full mb-10'>
+
+            </div>
 
             {props.children}
 

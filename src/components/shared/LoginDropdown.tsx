@@ -17,14 +17,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { PropsWithChildren } from "react";
 
-export function LoginDropdown() {
+export function LoginDropdown({children}: PropsWithChildren) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button >Login</Button>
+        {
+          children || <Button size="lg" variant={'glow'}>Login</Button>
+        }
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-56 z-50">
         <DropdownMenuLabel>Login As</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>

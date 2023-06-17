@@ -64,13 +64,9 @@ const Hero = () => {
                 }
               </TrailText>
             }
-            {/* <animated.h2 style={spring}>Empowering</animated.h2>
-            <animated.h2>Buisinesses With</animated.h2>
-            <animated.h2>Cutting-Edge</animated.h2>
-            <animated.h2 className='bg-gradient-to-br text-transparent  bg-clip-text from-primary to-[#045ccc]'>{content.gradientTitle}</animated.h2> */}
           </div>
           <animated.p className='mt-2 text-center md:text-left' style={fadeRight}>{content.desc}</animated.p>
-          <div className='flex gap-2 mt-5 justify-center lg:justify-start' >
+          <div className='flex gap-4 mt-5 justify-center lg:justify-start' >
             <animated.div style={popTrail[0]}><LoginDropdown /></animated.div>
             <animated.div style={popTrail[1]}><AppDownloadButton /></animated.div>
            

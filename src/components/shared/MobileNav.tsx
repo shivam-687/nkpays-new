@@ -3,6 +3,8 @@ import { ChevronRight } from 'lucide-react'
 import { nanoid } from 'nanoid'
 import Link from 'next/link'
 import React from 'react'
+import LoginDropdown from './LoginDropdown'
+import { Button } from '../ui/button'
 
 
 
@@ -29,6 +31,12 @@ const MobileNav = ({
                 </Link>
             })
         }
+
+        <div className='mt-5'>
+            <LoginDropdown>
+                <Button variant={'glow'} size={'lg'} className="w-full">Login</Button>
+            </LoginDropdown>
+        </div>
     </div>
   )
 }
