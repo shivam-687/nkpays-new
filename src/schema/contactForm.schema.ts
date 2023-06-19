@@ -1,4 +1,7 @@
 import { z } from "zod";
+import { WithPagination } from "./helpers/WithPagination";
+import { WithSorting } from "./helpers/WithSorting";
+import { WithSearch } from "./helpers/WithSearch";
 
 export const CreateContactSchema = z.object({
     name: z.string(),
@@ -12,7 +15,7 @@ export type CreateContactFormInput = z.TypeOf<typeof CreateContactSchema>;
 
 
 export const UpdateContactSchema = z.object({
-    id: z.string()
+    id: z.number()
 }).merge(CreateContactSchema);
 
 
@@ -20,13 +23,10 @@ export type UpdateContactnput = z.TypeOf<typeof UpdateContactSchema>;
 
 
 export const DeleteContactSchema = z.object({
-    id: z.string()
+    id: z.number()
 })
 
 
-export const ContactListSchema = z.object({
-    page: z.number(),
-    pageSize: z.number(),
-    search: z.string(),
-    sort: z.record(z.enum(['asc', 'desc'])).or(z.object({'_count': z.record(z.enum(['asc', 'desc']))})),
-})
+export const ContactListSchema = WithPagination
+                                .merge(WithSorting)
+                                .merge(WithSearch)

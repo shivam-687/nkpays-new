@@ -27,14 +27,14 @@ const content = {
             image: '/assets/images/icons/art-and-design.svg'
         },
         {
-            title: 'Balance Inquiry',
-            desc: 'AEPS Agent can check the balance of the customer simply in less than a minute by using Biznext portal or mobile application. We have the best mobile App to do AEPS.',
+            title: 'Aadhaar ATM',
+            desc: 'Instead of searching for an ATM, AEPS Agents of Biznext can convert their own store into an ATM using this service. Customers can withdraw money using their Aadhaar Number and finger print.',
             image: '/assets/images/icons/smartphone.svg',
             highlight: true
         },
         {
-            title: 'Balance Inquiry',
-            desc: 'AEPS Agent can check the balance of the customer simply in less than a minute by using Biznext portal or mobile application. We have the best mobile App to do AEPS.',
+            title: 'Mini Statement',
+            desc: 'Checking the mini statement of a customer has never been simpler. AEPS Agent will also get a commission every time he checks the mini statement of the customer via AEPS.',
             image: '/assets/images/icons/clock.svg'
         },
     ]

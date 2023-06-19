@@ -83,7 +83,7 @@ const Nav = () => {
                 { lable: 'Mobile Recharge', link: '/services/mobile' },
                 { lable: 'Travel Booking', link: '/services/travel' },
                 { lable: 'General Insurance', link: '/services/general' },
-                { lable: 'Domestice Money Transfer', link: '/services/dmt' },
+                { lable: 'Domestice Money Transfer', link: '/services/domestice-money-transfer' },
               ]} />
             <NavLink href={'/about'}>About Us</NavLink>
             <NavLink href={'/shop'}>Shop</NavLink>

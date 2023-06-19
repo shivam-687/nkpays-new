@@ -46,8 +46,8 @@ const Section = ({
                         sectionDesc
                         &&
                         <div className='overflow-hidden flex text-gray-600  items-center  justify-center w-full'>
-                            <Fade triggerOnce direction='down' delay={100} className='max-w-lg'>
-                                <p className='text-center'>{sectionDesc}</p>
+                            <Fade triggerOnce direction='down' delay={100} className='max-w-xl'>
+                                <p className='text-center text-muted-foreground'>{sectionDesc}</p>
                             </Fade>
                         </div>
                     }

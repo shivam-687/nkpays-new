@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import Nav from '../shared/Nav'
+import Footer from '../shared/Footer'
 
 const AppLayout = ({
     children
@@ -8,6 +9,7 @@ const AppLayout = ({
     <main>
         <Nav/>
         {children}
+        <Footer />
     </main>
   )
 }

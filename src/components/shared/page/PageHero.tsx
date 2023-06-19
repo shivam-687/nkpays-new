@@ -38,7 +38,7 @@ const PageHero = ({
 
                     </div>
                     <div className='overflow-hidden' >
-                        <Fade direction='down' delay={200} ><p className='mt-2 text-center md:text-left'>{desc}</p></Fade>
+                        <Fade direction='down' delay={200} ><p className='mt-2 text-center md:text-left text-muted-foreground'>{desc}</p></Fade>
                     </div>
                     {extra}
                 </div>
