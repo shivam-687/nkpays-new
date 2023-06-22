@@ -4,6 +4,7 @@ import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { TailSpin } from  'react-loader-spinner'
 import { LogOut } from 'lucide-react'
+import { convertNullToUndefiend } from '@/lib/utils'
 
 const Header = () => {
   const { data: session, status } = useSession()
@@ -30,8 +31,8 @@ const Header = () => {
             </Avatar>
             :
             <Avatar className="cursor-pointer shadow ring-2 w-6 h-6 hover:ring-4 transition-all   ring-green-700">
-              <AvatarImage src={session?.user.image}></AvatarImage>
-              <AvatarFallback src={session?.user.name?.charAt(0)}></AvatarFallback>
+              <AvatarImage src={convertNullToUndefiend(session?.user.image)}></AvatarImage>
+              <AvatarFallback >{convertNullToUndefiend(session?.user.name?.charAt(0))}</AvatarFallback>
             </Avatar>
           }
         </DropdownMenuTrigger>
