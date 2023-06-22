@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-    provider = "mysql"
+    provider = "postgres"
     // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
@@ -88,12 +88,12 @@ model Product {
     metaDesc       String?          @db.Text
     thumbnail      String?
     info           Json?
-    gallery        Json
+    gallery        Json?
     slug           String
-    price          Float?           @default(0.0)
+    price          String?           
     createdAt      DateTime         @default(now())
     updatedAt      DateTime         @updatedAt()
-    ProductEnquiry ProductEnquiry[]
+    ProductEnquiry ProductEnquiry[] 
 }
 
 model ProductEnquiry {
@@ -103,7 +103,7 @@ model ProductEnquiry {
     phone     String?
     message   String?  @db.Text
     productId Int
-    product   Product  @relation(fields: [productId], references: [id])
+    product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt()
 }
@@ -119,7 +119,7 @@ model LoginLink {
 model Contact {
     id        Int      @id @default(autoincrement())
     title     String?
-    address   String?  @db.Text
+    address   Json? 
     email     Json?
     phone     Json?
     createdAt DateTime @default(now())
@@ -130,4 +130,11 @@ model Social {
     id   Int    @id @default(autoincrement())
     site String
     link String
+}
+
+model Extension {
+    id Int    @id @default(autoincrement())
+    title String
+    data    Json
+    active  Boolean? @default(true)
 }

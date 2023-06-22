@@ -37,7 +37,7 @@ async function seedProduct() {
                 const metaDesc = desc.slice(0, 200);
                 const slug = slugify(title);
                 const thumbnail = faker.image.urlPicsumPhotos({width: 500, height: 500})
-                const price = Number(faker.commerce.price());
+                const price = Number(faker.commerce.price()).toString();
 
                 return {
                     title,
@@ -87,12 +87,73 @@ async function seedProductEnquiry() {
     }
 }
 
+export async function seedLoginLinks () {
+    try {
+        await prisma.loginLink.deleteMany();
+        const res = await prisma.loginLink.createMany({
+            data: [
+                {
+                    title: 'Application User',
+                    link: 'https://b2b.nkpays.in/login'
+                },
+                {
+                    title: 'Employee',
+                    link: 'https://b2b.nkpays.in/login'
+                },
+                {
+                    title: 'Customer Care',
+                    link: 'https://b2b.nkpays.in/login'
+                },
+
+            ]
+        });
+        console.log("LoginLink Seeding complete", res)
+        return res;
+    } catch (error) {
+        console.error(error)
+    }
+}
+export async function seedContact () {
+    try {
+        await prisma.contact.deleteMany();
+        const res = await prisma.contact.createMany({
+            data: [
+                {
+                    title: 'Main Office',
+                    address: {
+                        addr: 'Head office No.02, Mezenga Gaon, PO: Purana Titbar, Titbar',
+                        country: 'India',
+                        state: 'Assam',
+                        zipcode: '785632'
+                    }
+                },
+                {
+                    title: 'Branch Office',
+                    address: {
+                        addr: 'NA Ali Titbar Ward No.02 Near Titbar Public Club, PO: Titbar PS Titbar Jorhat',
+                        country: 'India',
+                        state: 'Assam',
+                        zipcode: '785630'
+                    }
+                },
+
+            ]
+        });
+        console.log("Contact Seeding complete", res)
+        return res;
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
 
 async function main() {
     // await SeedContactQuery();
-    const products = await seedProduct();
+    await seedProduct();
     await seedProductEnquiry()
-    
+    await seedContact()
+    await seedLoginLinks()
 }
 
 main()

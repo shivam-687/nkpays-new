@@ -6,12 +6,12 @@ import { SettingSidebarNav } from "./SettingSidebarNav"
 
 const sidebarNavItems = [
   {
-    title: "Site Settings",
+    title: "Contact",
     href: "/admin/settings",
   },
   {
-    title: "Social Link",
-    href: "/admin/settings/social",
+    title: "Extension",
+    href: "/admin/settings/extensions",
   },
 //   {
 //     title: "Appearance",

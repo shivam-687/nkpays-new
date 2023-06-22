@@ -71,6 +71,7 @@ const DMTServicePage = () => {
                 </div>
             </Section>
 
+            <article className='mx-auto max-w-6xl'>
             <section className='py-20 bg-primary/10'>
                 <div className="grid grid-cols-1 md:grid-cols-2 container mx-auto px-4 justify-center">
                     <div className='aspect-video relative'>
@@ -137,11 +138,12 @@ const DMTServicePage = () => {
                     </div>
 
                     <div className='aspect-video relative'>
-                        <Image alt="Why Biznext?" src="/assets/images/Why-Biznext-(2) (1).png" width={500} height={500} />
+                        <Image alt="Why Nkpays?" src="/assets/images/why-nkpays.png" width={500} height={500} />
                     </div>
                 </div>
             </section>
 
+            </article>
 
             <DownloadAppSection/>
             <ContactSection/>

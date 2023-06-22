@@ -51,7 +51,7 @@ const ProductCard = ({
 
                     </div>
                     <div className="absolute top-2 right-2 py-2 px-4 bg-white rounded-lg">
-                        <span className="text-md">₹ {formateCurrency(product.price || 0)}</span>
+                        <span className="text-md">{formateCurrency(Number(product.price) || 0)}</span>
                     </div>
                 </div>
             </div>

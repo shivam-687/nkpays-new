@@ -18,7 +18,7 @@ const DeleteProductButton = ({
 }) => {
     const dialog = useRef<HandleConfirmDialog>(null);
     const deleteMutation = api.product.delete.useMutation();
-    const ctx = api.useContext().contact_query;
+    const ctx = api.useContext().product;
 
     const deleteQuery = async () => {
         if(deleteMutation.isLoading)return;
@@ -26,8 +26,8 @@ const DeleteProductButton = ({
             const res = await deleteMutation.mutateAsync({id: product.id});
             if(res){
                 onDelete?.(res)
-                await ctx.invalidate();
             }
+            await ctx.invalidate();
             toast("Product deleted successfully!")
         } catch (error) {
             toast.error("Operation failed")

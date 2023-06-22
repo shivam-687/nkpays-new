@@ -70,5 +70,7 @@ export const ProductRouter = createTRPCRouter({
         }
       }
     })
+
+    return res;
   })
 });

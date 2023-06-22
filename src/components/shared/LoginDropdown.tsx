@@ -18,8 +18,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { PropsWithChildren } from "react";
+import { api } from "@/utils/api";
+import { nanoid } from "nanoid";
 
-export function LoginDropdown({children}: PropsWithChildren) {
+export function LoginDropdown({ children }: PropsWithChildren) {
+  const { data } = api.loginlink.getAll.useQuery({});
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -31,7 +35,21 @@ export function LoginDropdown({children}: PropsWithChildren) {
         <DropdownMenuLabel>Login As</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+
+          {
+            !data
+              ?
+              <div className="flex items-center justify-center">Not Available</div>
+              :
+              data.data.map(link => {
+                return (
+                  <DropdownMenuItem key={nanoid()} >
+                    <a className="capitalize" href={link.link} target="_blank">{link.title}</a>
+                  </DropdownMenuItem>
+                )
+              })
+          }
+          {/* <DropdownMenuItem>
             <User className="mr-2 h-4 w-4" />
             <span>Distributor</span>
           </DropdownMenuItem>
@@ -42,7 +60,7 @@ export function LoginDropdown({children}: PropsWithChildren) {
           <DropdownMenuItem>
             <Code2 className="mr-2 h-4 w-4" />
             <span>API & Whitelable Partner</span>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

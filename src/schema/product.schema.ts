@@ -9,7 +9,7 @@ export const CreateProductSchema = z.object({
     desc: z.string().optional(),
     metaDesc: z.string().optional(),
     thumbnail: z.string().optional(),
-    gallery: z.array(z.string()),
+    gallery: z.array(z.string()).default([]).optional(),
     info: z.object({
         sku: z.string().optional(),
         weight: z.string().optional(),
@@ -20,7 +20,7 @@ export const CreateProductSchema = z.object({
         massUnit: z.string().default('kg').optional()
     }).optional(),
     slug: z.string(),
-    price: z.number().default(0.0).optional(),
+    price: z.string().optional(),
 })
 
 
@@ -45,7 +45,24 @@ export const ProductListSchema = WithPagination
 .merge(WithSearch)
 
 
-export type ProductListItem = Product & {
+/** 
+ *  id: number;
+    title: string;
+    desc: string | null;
+    metaDesc: string | null;
+    thumbnail: string | null;
+    info: Prisma.JsonValue | null;
+    gallery: Prisma.JsonValue | null;
+    slug: string;
+    price: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+*/
+
+export type ProductListItem = CreateProductInput& {
+    id: number,
+    createdAt: Date,
+    updatedAt: Date,
     _count: {
         ProductEnquiry: number;
     };

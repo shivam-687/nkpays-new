@@ -1,5 +1,6 @@
 import ContactForm from '@/components/shared/ContactForm'
 import DownloadAppSection from '@/components/shared/DownloadAppSection'
+import GoogleMapWidget from '@/components/widget/GoogleMapWidget'
 import { Mail, Phone } from 'lucide-react'
 import { nanoid } from 'nanoid'
 import React from 'react'
@@ -58,7 +59,9 @@ const ContactPage = () => {
                         <p className='max-w-xs mb-3'>{ContactContent.address.addr2}</p>
                     </div>
 
-                    <div className='aspect-square bg-primary/30 flex items-center justify-center text-6xl font-bold w-full'>Map</div>
+                    <div className='aspect-square bg-primary/30 text-6xl font-bold w-full'>
+                        <GoogleMapWidget/>
+                    </div>
                 </div>
 
             </section>

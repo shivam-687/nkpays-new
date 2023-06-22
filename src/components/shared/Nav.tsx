@@ -78,11 +78,10 @@ const Nav = () => {
               lable='Services'
               childs={[
                 { lable: 'Aeps Service', link: '/services/aadhar-enabled-payment-system' },
-                { lable: 'BBPS Service', link: '/services/bbps' },
-                { lable: 'DTH Reacharge', link: '/services/dth' },
-                { lable: 'Mobile Recharge', link: '/services/mobile' },
-                { lable: 'Travel Booking', link: '/services/travel' },
-                { lable: 'General Insurance', link: '/services/general' },
+                { lable: 'BBPS Service', link: '/services/bbps-service' },
+                { lable: 'Recharge Api', link: '/services/recharge-api' },
+                { lable: 'Travel Booking', link: '/services/travel-booking-api' },
+                { lable: 'General Insurance', link: '/services/general-insurance' },
                 { lable: 'Domestice Money Transfer', link: '/services/domestice-money-transfer' },
               ]} />
             <NavLink href={'/about'}>About Us</NavLink>
@@ -115,7 +114,14 @@ const Nav = () => {
             onLinkClick={toggleDrawer}
             links={[
               { link: '/', lable: 'Home' },
-              { link: '/services', lable: 'Services' },
+              { link: '/services', lable: 'Services', children: [
+                { lable: 'Aeps Service', link: '/services/aadhar-enabled-payment-system' },
+                { lable: 'BBPS Service', link: '/services/bbps-service' },
+                { lable: 'Recharge Api', link: '/services/recharge-api' },
+                { lable: 'Travel Booking', link: '/services/travel-booking-api' },
+                { lable: 'General Insurance', link: '/services/general-insurance' },
+                { lable: 'Domestice Money Transfer', link: '/services/domestice-money-transfer' },
+              ] },
               { link: '/about', lable: 'About' },
               { link: '/Contact', lable: 'Contact' },
               { link: '/Shop', lable: 'Shop' },

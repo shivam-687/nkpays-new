@@ -7,5 +7,13 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export function formateCurrency (num: number) {
-  return Intl.NumberFormat('in').format(num);
+  return Intl.NumberFormat('en-IN', {style: 'currency', currency: 'INR'}).format(num);
 }
+
+export function convertNullToUndefiend<T> (data: T|null|undefined): T|undefined {
+  if(data === null){
+    return undefined
+  }
+  return data;
+}
+

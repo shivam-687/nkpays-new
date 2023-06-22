@@ -20,7 +20,11 @@ const AdminLayout = ({ children }: PropsWithChildren) => {
   }
 
   return (
-    <div className='flex h-screen'>
+    <>
+    <div className="flex items-center justify-center h-screen text-xl font-medium lg:hidden">
+      <p className='px-4 text-center'>Admin Panel is not compatible with this size of screen</p>
+    </div>
+    <div className='h-screen lg:flex hidden'>
       <SideBar />
       <div className='lg:ml-64  w-full'>
         <Header />
@@ -29,6 +33,7 @@ const AdminLayout = ({ children }: PropsWithChildren) => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 
