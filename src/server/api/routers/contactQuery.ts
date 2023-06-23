@@ -7,6 +7,7 @@ import {
   protectedProcedure,
 } from "~/server/api/trpc";
 import { ContactQuery, Prisma } from '@prisma/client';
+import { z } from 'zod';
 
 const paginate = createPaginator({perPage: 30})
 
@@ -54,6 +55,16 @@ export const ContactQueryRouter = createTRPCRouter({
 
   delete: protectedProcedure.input(DeleteContactSchema).mutation(async ({ctx, input}) => {
     return await ctx.prisma.contactQuery.delete({where: {id: input.id}})
+  }),
+
+  deleteMany: protectedProcedure.input(z.object({ids: z.array(z.number()).default([])})).mutation(async ({ctx, input}) => {
+    return await ctx.prisma.contactQuery.deleteMany({
+      where: {
+        id: {
+          in: input.ids
+        }
+      }
+    })
   }),
 
   update: protectedProcedure.input(UpdateContactSchema).mutation(async ({ctx, input}) => {

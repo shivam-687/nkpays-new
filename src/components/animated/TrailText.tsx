@@ -14,7 +14,7 @@ const TrailText: React.FC<PropsWithChildren<{ open: boolean }>> = ({ open, child
     return (
       <div>
         {trail.map(({ height, ...style }, index) => (
-          <a.div key={index} className='overflow-hidden h-10' style={style}>
+          <a.div key={index} className='overflow-hidden h-14' style={style}>
             <a.div style={{ height }}>{items[index]}</a.div>
           </a.div>
         ))}

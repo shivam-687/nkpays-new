@@ -7,11 +7,13 @@ import { PaginateOptions } from 'prisma-pagination'
 const TablePagination = ({
     paginationData,
     onPaginationChange,
-    className
+    className,
+    disable
 }: {
     paginationData?: PaginationMeta,
     onPaginationChange?: (value?: PaginateOptions) => void,
-    className?: string
+    className?: string,
+    disable?: boolean
 }) => {
 
 
@@ -39,8 +41,8 @@ const TablePagination = ({
                 <p className='text-gray-500 text-sm'>Total: {paginationData?.total || 0}</p>
             </div>
             <div className="flex gap-3">
-                <Button onClick={() => handlePrev()} variant={'outline'} disabled={!Boolean(paginationData?.prev)}>Prev</Button>
-                <Button onClick={() => handleNext()} variant={'outline'} disabled={!Boolean(paginationData?.next)}>Next</Button>
+                <Button  onClick={() => handlePrev()} variant={'outline'} disabled={!Boolean(paginationData?.prev) || disable}>Prev</Button>
+                <Button onClick={() => handleNext()} variant={'outline'} disabled={!Boolean(paginationData?.next) || disable}>Next</Button>
             </div>
         </div>
     )

@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import React from 'react'
-import {type ColumnDef} from '@tanstack/react-table'
+import { type ColumnDef } from '@tanstack/react-table'
 import { type ProductListItem } from '@/schema/product.schema'
 import DataTable from '../ui/DataTable'
-import { PaginationMeta } from '@/lib/types/PaginationMeta'
-import { PaginateOptions } from 'prisma-pagination'
+import { type PaginationMeta } from '@/lib/types/PaginationMeta'
+import { type PaginateOptions } from 'prisma-pagination'
 import dayjs from 'dayjs'
 import { formateCurrency } from '@/lib/utils'
 import {
@@ -18,6 +19,9 @@ import { Button } from '../ui/button'
 import { MoreHorizontal } from 'lucide-react'
 import Link from 'next/link'
 import DeleteProductButton from './DeleteProductButton'
+import { Checkbox } from '../ui/checkbox'
+import { api } from '@/utils/api'
+import { toast } from 'react-toastify'
 
 export type ProductTableProps = {
     data: ProductListItem[],
@@ -25,12 +29,32 @@ export type ProductTableProps = {
     onPaginationChange?: (value?: PaginateOptions) => void
 }
 
-const Columns: ColumnDef<ProductListItem>[] = [
+export const Columns: ColumnDef<ProductListItem>[] = [
+    {
+        id: "select",
+        accessorKey: 'id',
+        header: ({ table }) => (
+            <Checkbox
+                checked={table.getIsAllPageRowsSelected()}
+                onCheckedChange={(value: any) => table.toggleAllPageRowsSelected(!!value)}
+                aria-label="Select all"
+            />
+        ),
+        cell: ({ row }) => (
+            <Checkbox
+                checked={row.getIsSelected()}
+                onCheckedChange={(value: any) => row.toggleSelected(!!value)}
+                aria-label="Select row"
+            />
+        ),
+        enableSorting: false,
+        enableHiding: false,
+    },
     {
         accessorKey: 'thumbnail',
         header: 'Image',
-        cell({row}) {
-            return <div className='w-6 h-6 rounded bg-slate-500 bg-center bg-contain bg-no-repeat' style={{backgroundImage: `url(${row.original?.thumbnail||''})`}}></div>
+        cell({ row }) {
+            return <div className='w-6 h-6 rounded bg-slate-500 bg-center bg-contain bg-no-repeat' style={{ backgroundImage: `url(${row.original?.thumbnail || ''})` }}></div>
         },
     },
     {
@@ -40,8 +64,9 @@ const Columns: ColumnDef<ProductListItem>[] = [
     {
         accessorKey: 'price',
         header: 'Price',
-        cell({row}){
-            return formateCurrency(Number(row.original.price)||0)
+        cell({ row }) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+            return formateCurrency(Number(row.original.price) || 0)
         }
     },
     {
@@ -51,7 +76,7 @@ const Columns: ColumnDef<ProductListItem>[] = [
     {
         accessorKey: 'createdAt',
         header: 'Created At',
-        cell({row}) {
+        cell({ row }) {
             const data = row.original;
             return dayjs(data.createdAt).format('DD/MM/YYYY')
         },
@@ -76,7 +101,7 @@ const Columns: ColumnDef<ProductListItem>[] = [
                         <DropdownMenuItem><Link href={`/admin/products/${query.id}`}>Edit</Link></DropdownMenuItem>
                         <DropdownMenuItem >
                             <DeleteProductButton product={query} >
-                                {({deleteQuery, isLoading}) => {
+                                {({ deleteQuery, isLoading }) => {
                                     return (
                                         <span onClick={() => void deleteQuery()} className='text-red-700'>Delete</span>
                                     )
@@ -89,7 +114,7 @@ const Columns: ColumnDef<ProductListItem>[] = [
             )
         },
     },
-    
+
 
 ]
 
@@ -98,9 +123,23 @@ const ProductTable = ({
     paginationData,
     onPaginationChange
 }: ProductTableProps) => {
-  return (
-    <DataTable columns={Columns} data={data} paginationData={paginationData} onPaginationChange={onPaginationChange} />
-  )
+
+    const deleteManyMutation = api.product.deleteMany.useMutation();
+    const ctx = api.useContext().product;
+
+    async function deleteManyProduct(ids: number[]) {
+        try {
+            await deleteManyMutation.mutateAsync({ ids });
+            void ctx.invalidate();
+            toast.success('Products deleted successfully')
+        } catch (error: any) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            toast.error(error.message)
+        }
+    }
+    return (
+        <DataTable onDeleteMany={d => deleteManyProduct(d.map(v => v.id))} columns={Columns} data={data} paginationData={paginationData} onPaginationChange={onPaginationChange} />
+    )
 }
 
 export default ProductTable

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 
 import ProductTable from '@/components/product/ProductTable'
 import { Button } from '@/components/ui/button'
@@ -5,11 +6,14 @@ import { api } from '@/utils/api'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
 import { type PaginateOptions } from 'prisma-pagination'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+
 
 const ProductAdminPage = () => {
   const [pagination, setPagination] = useState<PaginateOptions|undefined>({page: 1, perPage: 10})
   const {data: queries} = api.product.getAll.useQuery({pagination});
+  
+
   
 
   return (

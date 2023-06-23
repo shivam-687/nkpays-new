@@ -14,8 +14,29 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Link from 'next/link'
 import DeleteContactQueryButton from '../DeleteContactQueryButton'
+import { Checkbox } from '@/components/ui/checkbox'
 
 export const ContactQueryColumns: ColumnDef<ContactQuery>[] = [
+    {
+        id: "select",
+        accessorKey: 'id',
+        header: ({ table }) => (
+            <Checkbox
+                checked={table.getIsAllPageRowsSelected()}
+                onCheckedChange={(value: any) => table.toggleAllPageRowsSelected(!!value)}
+                aria-label="Select all"
+            />
+        ),
+        cell: ({ row }) => (
+            <Checkbox
+                checked={row.getIsSelected()}
+                onCheckedChange={(value: any) => row.toggleSelected(!!value)}
+                aria-label="Select row"
+            />
+        ),
+        enableSorting: false,
+        enableHiding: false,
+    },
     {
         accessorKey: "name",
         header: "Name",

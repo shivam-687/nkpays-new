@@ -55,6 +55,16 @@ export const ProductRouter = createTRPCRouter({
     return await ctx.prisma.product.delete({where: {id: input.id}})
   }),
 
+  deleteMany: protectedProcedure.input(z.object({ids: z.array(z.number()).default([])})).mutation(async ({ctx, input}) => {
+    return await ctx.prisma.product.deleteMany({
+      where: {
+        id: {
+          in: input.ids
+        }
+      }
+    })
+  }),
+
   update: protectedProcedure.input(UpdateProductSchema).mutation(async ({ctx, input}) => {
     return await ctx.prisma.product.update({where: {id: input.id}, data: input})
   }),

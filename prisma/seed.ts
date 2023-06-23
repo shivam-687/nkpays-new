@@ -149,7 +149,7 @@ export async function seedContact () {
 
 
 async function main() {
-    // await SeedContactQuery();
+    await SeedContactQuery();
     await seedProduct();
     await seedProductEnquiry()
     await seedContact()

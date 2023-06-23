@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 
 import React from 'react'
 import {type ColumnDef} from '@tanstack/react-table'
@@ -18,6 +19,9 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Checkbox } from '../ui/checkbox'
+import { api } from '@/utils/api'
+import { toast } from 'react-toastify'
 
 export type ProductTableProps = {
     data: ProductEnquiryListItem[],
@@ -26,6 +30,26 @@ export type ProductTableProps = {
 }
 
 const Columns: ColumnDef<ProductEnquiryListItem>[] = [
+    {
+        id: "select",
+        accessorKey: 'id',
+        header: ({ table }) => (
+          <Checkbox
+            checked={table.getIsAllPageRowsSelected()}
+            onCheckedChange={(value: any) => table.toggleAllPageRowsSelected(!!value)}
+            aria-label="Select all"
+          />
+        ),
+        cell: ({ row }) => (
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value: any) => row.toggleSelected(!!value)}
+            aria-label="Select row"
+          />
+        ),
+        enableSorting: false,
+        enableHiding: false,
+      },
    
     {
         accessorKey: 'name',
@@ -102,8 +126,21 @@ const ProductEnquiryTable = ({
     paginationData,
     onPaginationChange
 }: ProductTableProps) => {
+    const deleteManyMutation = api.product_enquiry.deleteMany.useMutation();
+    const ctx = api.useContext().product_enquiry;
+
+    async function deleteManyProductEnquiry(ids: number[]) {
+        try {
+            await deleteManyMutation.mutateAsync({ ids });
+            void ctx.invalidate();
+            toast.success('Products Enquiry deleted successfully')
+        } catch (error: any) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            toast.error(error.message)
+        }
+    }
   return (
-    <DataTable columns={Columns} data={data} paginationData={paginationData} onPaginationChange={onPaginationChange} />
+    <DataTable  onDeleteMany={d => deleteManyProductEnquiry(d.map(v => v.id))} columns={Columns} data={data} paginationData={paginationData} onPaginationChange={onPaginationChange} />
   )
 }
 

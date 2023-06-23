@@ -48,18 +48,7 @@ export const authOptions: NextAuthOptions = {
         ...session.user,
         id: user.id,
       },
-    }),
-    jwt({token, user}) {
-        if(user){
-          const u: any = user;
-          token.id = u.id;
-          token.email = u.email,
-          token.name = u.name,
-          token.role = u.role,
-          token.image = u.image
-        }
-        return token;
-    },
+    })
   },
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -69,30 +58,30 @@ export const authOptions: NextAuthOptions = {
     }),
 
 
-    CredentialsProvider({
-      // The name to display on the sign in form (e.g. "Sign in with...")
-      name: "Credentials",
+    // CredentialsProvider({
+    //   // The name to display on the sign in form (e.g. "Sign in with...")
+    //   name: "Credentials",
       
-      // `credentials` is used to generate a form on the sign in page.
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
-      credentials: {
-        email: { label: "Email", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" }
-      },
+    //   // `credentials` is used to generate a form on the sign in page.
+    //   // You can specify which fields should be submitted, by adding keys to the `credentials` object.
+    //   // e.g. domain, username, password, 2FA token, etc.
+    //   // You can pass any HTML attribute to the <input> tag through the object.
+    //   credentials: {
+    //     email: { label: "Email", type: "text", placeholder: "jsmith" },
+    //     password: { label: "Password", type: "password" }
+    //   },
 
-      async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        const user = { id: "1", name: "Admin", email: "admin@nkpays.com", role: 'ADMIN', image: '/assets/images/admin.png' }
-        console.log({credentials}, credentials?.email === user.email && credentials.password === 'shivamsi687##')
-        if (credentials?.email === user.email && credentials.password === 'shivamsi687##') {
-          // Any object returned will be saved in `user` property of the JWT
-          return user
-        } 
-        return null;
-      }
-    })
+    //   async authorize(credentials, req) {
+    //     // Add logic here to look up the user from the credentials supplied
+    //     const user = { id: "1", name: "Admin", email: "admin@nkpays.com", role: 'ADMIN', image: '/assets/images/admin.png' }
+    //     console.log({credentials}, credentials?.email === user.email && credentials.password === 'shivamsi687##')
+    //     if (credentials?.email === user.email && credentials.password === 'shivamsi687##') {
+    //       // Any object returned will be saved in `user` property of the JWT
+    //       return user
+    //     } 
+    //     return null;
+    //   }
+    // })
     /**
      * ...add more providers here.
      *
@@ -102,7 +91,7 @@ export const authOptions: NextAuthOptions = {
      *
      * @see https://next-auth.js.org/providers/github
      */
-  ],
+  ]
 };
 
 /**

@@ -34,6 +34,16 @@ export const ContactConfigRouter = createTRPCRouter({
     return await ctx.prisma.contact.delete({where: {id: input.id}})
   }),
 
+  deleteMany: protectedProcedure.input(z.object({ids: z.array(z.number()).default([])})).mutation(async ({ctx, input}) => {
+    return await ctx.prisma.contact.deleteMany({
+      where: {
+        id: {
+          in: input.ids
+        }
+      }
+    })
+  }),
+
   update: protectedProcedure.input(UpdateContactConfigSchema).mutation(async ({ctx, input}) => {
     return await ctx.prisma.contact.update({where: {id: input.id}, data: input})
   }),

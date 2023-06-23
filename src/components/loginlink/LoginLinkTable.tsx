@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 
 import React from 'react'
 import {type ColumnDef} from '@tanstack/react-table'
@@ -20,6 +21,9 @@ import {
 import DeleteLoginLinkButton from './DeleteLoginLink'
 import { LoginLink } from '@prisma/client'
 import MutateLoginLinkDialog from './MutateLoginLinkDialog'
+import { api } from '@/utils/api'
+import { toast } from 'react-toastify'
+import { Checkbox } from '../ui/checkbox'
 
 export type LoginLinkTableProps = {
     data: LoginLink[],
@@ -28,6 +32,26 @@ export type LoginLinkTableProps = {
 }
 
 const Columns: ColumnDef<LoginLink>[] = [
+    {
+        id: "select",
+        accessorKey: 'id',
+        header: ({ table }) => (
+            <Checkbox
+                checked={table.getIsAllPageRowsSelected()}
+                onCheckedChange={(value: any) => table.toggleAllPageRowsSelected(!!value)}
+                aria-label="Select all"
+            />
+        ),
+        cell: ({ row }) => (
+            <Checkbox
+                checked={row.getIsSelected()}
+                onCheckedChange={(value: any) => row.toggleSelected(!!value)}
+                aria-label="Select row"
+            />
+        ),
+        enableSorting: false,
+        enableHiding: false,
+    },
    
     {
         accessorKey: 'id',
@@ -101,8 +125,23 @@ const LoginLinkTable = ({
     paginationData,
     onPaginationChange
 }: LoginLinkTableProps) => {
+    
+    const deleteManyMutation = api.loginlink.deleteMany.useMutation();
+    const ctx = api.useContext().loginlink;
+
+    async function deleteManyRow(ids: number[]) {
+        try {
+            await deleteManyMutation.mutateAsync({ ids });
+            void ctx.invalidate();
+            toast.success('Login links deleted successfully')
+        } catch (error: any) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            toast.error(error.message)
+        }
+    }
+    
   return (
-    <DataTable columns={Columns} data={data} paginationData={paginationData} onPaginationChange={onPaginationChange} />
+    <DataTable onDeleteMany={d => deleteManyRow(d.map(v => v.id))} columns={Columns} data={data} paginationData={paginationData} onPaginationChange={onPaginationChange} />
   )
 }
 

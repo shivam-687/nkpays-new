@@ -70,6 +70,16 @@ export const ProductEnquiryRouter = createTRPCRouter({
     return await ctx.prisma.productEnquiry.delete({where: {id: input.id}})
   }),
 
+  deleteMany: protectedProcedure.input(z.object({ids: z.array(z.number()).default([])})).mutation(async ({ctx, input}) => {
+    return await ctx.prisma.productEnquiry.deleteMany({
+      where: {
+        id: {
+          in: input.ids
+        }
+      }
+    })
+  }),
+
   update: protectedProcedure.input(UpdateProductEnquirySchema).mutation(async ({ctx, input}) => {
     return await ctx.prisma.productEnquiry.update({where: {id: input.id}, data: input})
   }),
@@ -86,6 +96,9 @@ export const ProductEnquiryRouter = createTRPCRouter({
         }
       }
     })
-  })
+
+    return res;
+  }),
+
   
 });
