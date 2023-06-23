@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { TailSpin } from "react-loader-spinner"
 import { convertNullToUndefiend } from "@/lib/utils"
-import { useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 
 export function UserNav() {
     const { data: session, status } = useSession()
@@ -83,7 +83,7 @@ export function UserNav() {
           </DropdownMenuItem>
         </DropdownMenuGroup> */}
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => void signOut()}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
           {/* <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut> */}
