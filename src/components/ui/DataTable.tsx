@@ -21,13 +21,15 @@ import React, { useEffect, useState } from "react"
 import TablePagination from "@/components/shared/TablePagination"
 import { type PaginateOptions } from "prisma-pagination"
 import { Button } from "./button"
+import Loading from "../shared/Loading"
 
 interface ContactQueryTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[],
   paginationData?: PaginationMeta,
   onPaginationChange?: (value?: PaginateOptions) => void,
-  onDeleteMany?: (selectedData: TData[]) => Promise<void>
+  onDeleteMany?: (selectedData: TData[]) => Promise<void>,
+  dataLoading?: boolean
 }
 
 function DataTable<TData, TValue>({
@@ -35,7 +37,9 @@ function DataTable<TData, TValue>({
   data,
   paginationData,
   onPaginationChange,
-  onDeleteMany
+  onDeleteMany,
+  dataLoading
+
 }: ContactQueryTableProps<TData, TValue>) {
   // const [pgState, setPgState] = useState<PaginationState>({ pageIndex: paginationData?.currentPage ? paginationData?.currentPage-1 :0,pageSize: paginationData?.perPage||10,})
   const [selectedRows, setSlectedRows] = useState<RowSelectionState>({});
@@ -51,9 +55,9 @@ function DataTable<TData, TValue>({
   })
 
 
-  async function deleteMany(){
+  async function deleteMany() {
     const data = table.getFilteredSelectedRowModel().rows.map(t => t.original);
-    if(!onDeleteMany || data.length <= 0) return;
+    if (!onDeleteMany || data.length <= 0) return;
     setLoading(true);
     await onDeleteMany?.(table.getFilteredSelectedRowModel().rows.map(t => t.original));
     setLoading(false)
@@ -69,9 +73,9 @@ function DataTable<TData, TValue>({
             {/* {table.getFilteredRowModel().rows.length} row(s) selected. */}
           </p>
           {
-          table.getFilteredSelectedRowModel().rows.length > 0 
-          &&
-          <Button disabled={loading} onClick={() => void deleteMany()} size={'sm'} variant={'destructive'}>Delete</Button>
+            table.getFilteredSelectedRowModel().rows.length > 0
+            &&
+            <Button disabled={loading} onClick={() => void deleteMany()} size={'sm'} variant={'destructive'}>Delete</Button>
           }
         </div>
         <Table>
@@ -94,26 +98,36 @@ function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
+            {table.getRowModel().rows?.length
+              ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) :
+              dataLoading
+                ?
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 flex w-full  items-center justify-center">
+                    <Loading />
+                  </TableCell>
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
+
+                :
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    No results.
+                  </TableCell>
+                </TableRow>
+            }
           </TableBody>
         </Table>
       </div>

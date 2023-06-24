@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 
 const ContactQueryPage = () => {
   const [pagination, setPagination] = useState<PaginateOptions|undefined>({page: 1, perPage: 10})
-  const {data: queries, refetch} = api.contact_query.getAll.useQuery({pagination});
+  const {data: queries, isLoading} = api.contact_query.getAll.useQuery({pagination});
   const deleteManyMutation = api.product.deleteMany.useMutation();
     const ctx = api.useContext().product;
 
@@ -35,7 +35,7 @@ const ContactQueryPage = () => {
         </div>
 
         <div className='mt-10'>
-            <DataTable onDeleteMany={d => deleteMany(d.map(v => v.id))} columns={ContactQueryColumns} data={queries?.data||[]} paginationData={queries?.meta} onPaginationChange={(value) => setPagination(value)} />
+            <DataTable dataLoading={isLoading} onDeleteMany={d => deleteMany(d.map(v => v.id))} columns={ContactQueryColumns} data={queries?.data||[]} paginationData={queries?.meta} onPaginationChange={(value) => setPagination(value)} />
         </div>
     </div>
   )

@@ -15,6 +15,7 @@ import {
 import Link from 'next/link'
 import DeleteContactQueryButton from '../DeleteContactQueryButton'
 import { Checkbox } from '@/components/ui/checkbox'
+import ContactQueryDrawer from '../ContactQueryDrawer'
 
 export const ContactQueryColumns: ColumnDef<ContactQuery>[] = [
     {
@@ -40,6 +41,11 @@ export const ContactQueryColumns: ColumnDef<ContactQuery>[] = [
     {
         accessorKey: "name",
         header: "Name",
+        cell({ row }) {
+            return <div className='flex items-center justify-between'>
+                <ContactQueryDrawer query={row.original} trigger={<span className='font-medium hover:underline cursor-pointer'>{row.original.name}</span>} />
+            </div>
+        },
     },
     {
         accessorKey: "email",
@@ -75,7 +81,6 @@ export const ContactQueryColumns: ColumnDef<ContactQuery>[] = [
                             Copy Email
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem><Link href={`/admin/contactQuery/${query.id}`}>View Query</Link></DropdownMenuItem>
                         <DropdownMenuItem >
                             <DeleteContactQueryButton contactQuery={query} >
                                 {({deleteQuery, isLoading}) => {

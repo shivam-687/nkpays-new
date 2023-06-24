@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 
 const ProductEnquiryPage = () => {
   const [pagination, setPagination] = useState<PaginateOptions|undefined>({page: 1, perPage: 10})
-  const {data: queries} = api.product_enquiry.getAll.useQuery({pagination});
+  const {data: queries, isLoading} = api.product_enquiry.getAll.useQuery({pagination});
   
 
   return (
@@ -17,7 +17,7 @@ const ProductEnquiryPage = () => {
         </div>
 
         <div className='mt-10'>
-            <ProductEnquiryTable data={queries?.data||[]} paginationData={queries?.meta} onPaginationChange={(value) => setPagination(value)} />
+            <ProductEnquiryTable loading={isLoading} data={queries?.data||[]} paginationData={queries?.meta} onPaginationChange={(value) => setPagination(value)} />
         </div>
     </div>
   )

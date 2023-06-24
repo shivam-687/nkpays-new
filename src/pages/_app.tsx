@@ -12,12 +12,16 @@ import 'react-quill/dist/quill.snow.css';
 import SiteLoader from "@/components/shared/SiteLoader";
 import LayoutSwitcher from "@/components/layout/LayoutSwitcher";
 
+import NextNProgress from 'nextjs-progressbar'
+
+
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
     <SessionProvider session={session}>
+      <NextNProgress />
       <ToastContainer/>
       <SiteLoader>
         <LayoutSwitcher>

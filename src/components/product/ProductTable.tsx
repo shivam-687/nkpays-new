@@ -26,7 +26,8 @@ import { toast } from 'react-toastify'
 export type ProductTableProps = {
     data: ProductListItem[],
     paginationData?: PaginationMeta,
-    onPaginationChange?: (value?: PaginateOptions) => void
+    onPaginationChange?: (value?: PaginateOptions) => void,
+    loading?: boolean
 }
 
 export const Columns: ColumnDef<ProductListItem>[] = [
@@ -121,7 +122,8 @@ export const Columns: ColumnDef<ProductListItem>[] = [
 const ProductTable = ({
     data,
     paginationData,
-    onPaginationChange
+    onPaginationChange,
+    loading
 }: ProductTableProps) => {
 
     const deleteManyMutation = api.product.deleteMany.useMutation();
@@ -138,7 +140,7 @@ const ProductTable = ({
         }
     }
     return (
-        <DataTable onDeleteMany={d => deleteManyProduct(d.map(v => v.id))} columns={Columns} data={data} paginationData={paginationData} onPaginationChange={onPaginationChange} />
+        <DataTable dataLoading={loading} onDeleteMany={d => deleteManyProduct(d.map(v => v.id))} columns={Columns} data={data} paginationData={paginationData} onPaginationChange={onPaginationChange} />
     )
 }
 

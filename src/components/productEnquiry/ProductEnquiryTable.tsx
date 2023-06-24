@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 
 import React from 'react'
-import {type ColumnDef} from '@tanstack/react-table'
+import { type ColumnDef } from '@tanstack/react-table'
 import DataTable from '../ui/DataTable'
 import { type PaginationMeta } from '@/lib/types/PaginationMeta'
 import { type PaginateOptions } from 'prisma-pagination'
@@ -9,7 +9,7 @@ import dayjs from 'dayjs'
 import { type ProductEnquiryListItem } from '@/schema/productEnquiry'
 import Link from 'next/link'
 import { Button } from '../ui/button'
-import { Eye, MoreHorizontal } from 'lucide-react'
+import { Eye, MoreHorizontal, View } from 'lucide-react'
 import DeleteProductEnquiryButton from './ProductEnquiryDeleteButton';
 import {
     DropdownMenu,
@@ -22,11 +22,14 @@ import {
 import { Checkbox } from '../ui/checkbox'
 import { api } from '@/utils/api'
 import { toast } from 'react-toastify'
+import ProductEnquiryDialog from './ProductEnquiryFormDialog'
+import ProductEnquiryDrawer from './ProductEnquiryDrawer'
 
 export type ProductTableProps = {
     data: ProductEnquiryListItem[],
     paginationData?: PaginationMeta,
-    onPaginationChange?: (value?: PaginateOptions) => void
+    onPaginationChange?: (value?: PaginateOptions) => void,
+    loading?: boolean
 }
 
 const Columns: ColumnDef<ProductEnquiryListItem>[] = [
@@ -34,26 +37,31 @@ const Columns: ColumnDef<ProductEnquiryListItem>[] = [
         id: "select",
         accessorKey: 'id',
         header: ({ table }) => (
-          <Checkbox
-            checked={table.getIsAllPageRowsSelected()}
-            onCheckedChange={(value: any) => table.toggleAllPageRowsSelected(!!value)}
-            aria-label="Select all"
-          />
+            <Checkbox
+                checked={table.getIsAllPageRowsSelected()}
+                onCheckedChange={(value: any) => table.toggleAllPageRowsSelected(!!value)}
+                aria-label="Select all"
+            />
         ),
         cell: ({ row }) => (
-          <Checkbox
-            checked={row.getIsSelected()}
-            onCheckedChange={(value: any) => row.toggleSelected(!!value)}
-            aria-label="Select row"
-          />
+            <Checkbox
+                checked={row.getIsSelected()}
+                onCheckedChange={(value: any) => row.toggleSelected(!!value)}
+                aria-label="Select row"
+            />
         ),
         enableSorting: false,
         enableHiding: false,
-      },
-   
+    },
+
     {
         accessorKey: 'name',
-        header: 'Name'
+        header: 'Name',
+        cell({ row }) {
+            return <div className='flex items-center justify-between'>
+                <ProductEnquiryDrawer query={row.original} trigger={<span className='font-medium hover:underline cursor-pointer'>{row.original.name}</span>} />
+            </div>
+        },
     },
     {
         accessorKey: 'email',
@@ -62,20 +70,21 @@ const Columns: ColumnDef<ProductEnquiryListItem>[] = [
     {
         accessorKey: 'product',
         header: 'Product',
-        cell({row}) {
+        cell({ row }) {
             const data = row.original;
-            return <div className='flex justify-between items-center'>
-                <p className='line-clamp-1'>{data.product.title}</p>
-                <Link href={`/admin/products/${data.product.id}`}>
-                    <Button size={'sm'} variant={'outline'} title={'View Product'}><Eye/></Button>
-                </Link>
+            return (
+                <div className='flex justify-between items-center group'>
+                    <Link className='font-medium group-hover:underline' href={`/admin/products/${data.product.id}`}>
+                        {data.product.title}
+                    </Link>
                 </div>
+            )
         },
     },
     {
         accessorKey: 'createdAt',
         header: 'Created At',
-        cell({row}) {
+        cell({ row }) {
             const data = row.original;
             return dayjs(data.createdAt).format('DD/MM/YYYY')
         },
@@ -100,11 +109,17 @@ const Columns: ColumnDef<ProductEnquiryListItem>[] = [
                         >
                             Copy Email
                         </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <Link href={`/admin/products/${query.productId}`}>View Product</Link>
+                        </DropdownMenuItem>
+
+
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem><Link href={`/admin/contactQuery/${query.id}`}>View Query</Link></DropdownMenuItem>
+
+
                         <DropdownMenuItem >
                             <DeleteProductEnquiryButton enquiry={query} >
-                                {({deleteQuery, isLoading}) => {
+                                {({ deleteQuery, isLoading }) => {
                                     return (
                                         <span onClick={() => void deleteQuery()} className='text-red-700'>Delete</span>
                                     )
@@ -117,14 +132,15 @@ const Columns: ColumnDef<ProductEnquiryListItem>[] = [
             )
         },
     }
-    
+
 
 ]
 
 const ProductEnquiryTable = ({
     data,
     paginationData,
-    onPaginationChange
+    onPaginationChange,
+    loading
 }: ProductTableProps) => {
     const deleteManyMutation = api.product_enquiry.deleteMany.useMutation();
     const ctx = api.useContext().product_enquiry;
@@ -139,9 +155,9 @@ const ProductEnquiryTable = ({
             toast.error(error.message)
         }
     }
-  return (
-    <DataTable  onDeleteMany={d => deleteManyProductEnquiry(d.map(v => v.id))} columns={Columns} data={data} paginationData={paginationData} onPaginationChange={onPaginationChange} />
-  )
+    return (
+        <DataTable dataLoading={loading} onDeleteMany={d => deleteManyProductEnquiry(d.map(v => v.id))} columns={Columns} data={data} paginationData={paginationData} onPaginationChange={onPaginationChange} />
+    )
 }
 
 export default ProductEnquiryTable
