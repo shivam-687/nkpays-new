@@ -53,16 +53,21 @@ const ThumbnailUploader = ({
                     method: 'POST',
                 }
             );
-            const data = await response.json() as {
+            const {data, error} = await response.json() as {
                 data: {
-                    fileName: string,
-                    mimetype: string
                     url: string
-                }
+                }|null,
+                error: string | null
             };
+
+            if (error || !data) {
+                setErrorMessage("Something went wrong!")
+                setLoading(false)
+                return;
+              }
             // console.log({url: data});
             setImageFile(undefined);
-            onImageUpload?.(data.data.url)
+            onImageUpload?.(data.url)
             setLoading(false);
         } catch (error: any) {
             setErrorMessage(error.message)

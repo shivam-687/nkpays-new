@@ -5,6 +5,7 @@ import { nanoid } from 'nanoid'
 import { Fade } from 'react-awesome-reveal'
 import DownloadAppSection from '@/components/shared/DownloadAppSection'
 import LogoCarousel from '@/components/shared/LogoCarousel'
+import ContactSection from '@/components/landing-page/ContactSection'
 
 
 const content = {
@@ -30,45 +31,56 @@ const content = {
 
 const AboutPage = () => {
     return (
-        <Section>
-            <div className='mx-auto max-w-6xl px-4 space-y-5'>
-                <h1 className='text-4xl md:text-5xl font-bold'>About Us</h1>
+        <>
+            <section className='h-64 bg-primary/30  relative'>
+                <div className='grid place-content-center z-20 backdrop-blur-lg w-full h-full'><h1 className='text-6xl font-bold'>About Us</h1></div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className='w-20 h-20 rounded-full top-10 left-20 absolute bg-primary -z-20' style={{}}></div>
+                <div className='w-20 h-20 rounded-full top-20 right-1/2 absolute bg-primary -z-20' style={{}}></div>
+                <div className='w-20 h-20 rounded-full left-1/3 bottom-0 absolute bg-primary -z-20' style={{}}></div>
 
-                    <div className="rounded-xl p-5">
-                        <p className='text-lg leading-relaxed  '>{content.about}</p>
-                    </div>
 
-                    <div className="rounded-xl overflow-hidden">
-                        <Image src="/assets/images/Image-1-About-Us (1).png" alt={'Why Nkpays'} width={750} height={1393} />
+            </section>
+            <Section>
+                <div className='mx-auto max-w-6xl px-4 space-y-5'>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                        <div className="rounded-xl p-5">
+                            <p className='text-lg leading-relaxed  '>{content.about}</p>
+                        </div>
+
+                        <div className="rounded-xl overflow-hidden">
+                            <Image src="/assets/images/Image-1-About-Us (1).png" alt={'Why Nkpays'} width={750} height={1393} />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 mt-20 gap-10 container items-center">
-                <div><Image alt="" width={700} height={522} src={'/assets/images/about-illus.png'} /></div>
-                <div className='max-w-lg space-y-5'>
-                    {
-                        content.whatwedo.map((w, index) => {
-                            return (
-                                <div key={nanoid()} className='overflow-hidden'>
-                                    <Fade delay={100 * (index + 1)} className='space-y-1'>
-                                        <h2 className='text-2xl font-bold'>{w.title}</h2>
-                                        <p>{w.desc}</p>
-                                    </Fade>
-                                </div>
-                            )
-                        })
-                    }
+                <div className="grid grid-cols-1 md:grid-cols-2 mt-20 gap-10 container items-center">
+                    <div><Image alt="" width={700} height={522} src={'/assets/images/about-illus.png'} /></div>
+                    <div className='max-w-lg space-y-5'>
+                        {
+                            content.whatwedo.map((w, index) => {
+                                return (
+                                    <div key={nanoid()} className='overflow-hidden'>
+                                        <Fade delay={100 * (index + 1)} className='space-y-1'>
+                                            <h2 className='text-2xl font-bold'>{w.title}</h2>
+                                            <p>{w.desc}</p>
+                                        </Fade>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-            </div>
 
-            <div className="mt-20">
-                <LogoCarousel />
-                <DownloadAppSection />
-            </div>
-        </Section>
+                <div className="mt-20">
+                    <LogoCarousel />
+                    <DownloadAppSection />
+                </div>
+            </Section>
+            <ContactSection />
+        </>
     )
 }
 
