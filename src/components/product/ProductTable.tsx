@@ -55,7 +55,7 @@ export const Columns: ColumnDef<ProductListItem>[] = [
         accessorKey: 'thumbnail',
         header: 'Image',
         cell({ row }) {
-            return <div className='w-6 h-6 rounded bg-slate-500 bg-center bg-contain bg-no-repeat' style={{ backgroundImage: `url(${row.original?.thumbnail || ''})` }}></div>
+            return <div className='w-8 h-8 rounded bg-slate-500 bg-center bg-contain bg-no-repeat' style={{ backgroundImage: `url(${row.original?.thumbnail || ''})` }}></div>
         },
     },
     {

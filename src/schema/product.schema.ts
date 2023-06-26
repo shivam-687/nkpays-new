@@ -15,6 +15,7 @@ export const CreateProductSchema = z.object({
         weight: z.string().optional(),
         width: z.string().optional(),
         height: z.string().optional(),
+        length: z.string().optional(),
         color: z.string().optional(),
         dimUnit: z.string().default('cm').optional(),
         massUnit: z.string().default('kg').optional()

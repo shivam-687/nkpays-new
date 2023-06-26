@@ -6,6 +6,9 @@ import React, { useState } from 'react'
 import { Button } from '../ui/button';
 import { TailSpin } from 'react-loader-spinner';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
+import Supabase, { SupabaseStorage, getSupabseUploadUrl } from '@/utils/supabase';
+import { nanoid } from 'nanoid';
+import { supabaseUpload } from '@/utils/fileUpload';
 
 export type ThumbnailUploaderProps = React.InputHTMLAttributes<HTMLInputElement> & {
     onImageUpload?: (imageUrl: string) => void,
@@ -42,32 +45,20 @@ const ThumbnailUploader = ({
 
     const upload = async () => {
         if (!imageFile || loading) return;
-        
+
         setLoading(true)
         try {
-            const formData = new FormData()
-            formData.append('file', imageFile);
-            const response = await fetch(`/api/upload`,
-                {
-                    body: formData,
-                    method: 'POST',
-                }
-            );
-            const {data, error} = await response.json() as {
-                data: {
-                    url: string
-                }|null,
-                error: string | null
-            };
+            const {data, error} = await supabaseUpload(imageFile);
+            if(error){
+                setErrorMessage(error.message);
+                setPreviewImage(undefined);
+            }
 
-            if (error || !data) {
-                setErrorMessage("Something went wrong!")
-                setLoading(false)
-                return;
-              }
-            // console.log({url: data});
+            if(data){
+                onImageUpload?.(getSupabseUploadUrl(data.path))
+            }
+            console.log({data});
             setImageFile(undefined);
-            onImageUpload?.(data.url)
             setLoading(false);
         } catch (error: any) {
             setErrorMessage(error.message)
@@ -81,7 +72,7 @@ const ThumbnailUploader = ({
         <>
             <Card className=''>
                 <CardHeader>
-                    <CardTitle>Thumnail Image for product</CardTitle>
+                    <CardTitle>Thumbnail Image for product</CardTitle>
                     <CardDescription>
                         {
                             errorMessage && <p className='py-2 text-xs text-red-700'>{errorMessage}</p>

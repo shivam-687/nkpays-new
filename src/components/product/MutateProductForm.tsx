@@ -32,7 +32,7 @@ import slugify from 'slugify'
 
 
 export type MutateProductFormProps = {
-    data?: ProductListItem ,
+    data?: ProductListItem,
     trigger?: ReactNode,
     onMutate?: (product?: Product) => void
 }
@@ -52,7 +52,7 @@ const MutateProductForm = ({
         defaultValues: data ? {
             ...data,
             gallery: []
-        }: {
+        } : {
             info: {
                 dimUnit: 'cm',
                 massUnit: 'gram'
@@ -62,15 +62,14 @@ const MutateProductForm = ({
 
 
     async function onSubmit(values: CreateProductInput | z.infer<typeof UpdateProductSchema>) {
-        console.log('submit');
-        
+
         try {
             if (data) {
                 const res = await updateProductMutation.mutateAsync(values as z.infer<typeof UpdateProductSchema>);
                 onMutate?.(res);
                 toast.success('Product update successfully!')
             } else {
-                const res = await createProductMutation.mutateAsync(values as z.infer<typeof UpdateProductSchema>);
+                const res = await createProductMutation.mutateAsync(values as z.infer<typeof CreateProductSchema>);
                 onMutate?.(res);
                 toast.success('Product Created successfully!')
                 form.reset({});
@@ -80,7 +79,7 @@ const MutateProductForm = ({
             toast.error(error.message)
         }
     }
-    
+
 
     return (
         <>
@@ -95,26 +94,26 @@ const MutateProductForm = ({
                             >
                                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                                     {
-                                        data 
+                                        data
                                         &&
                                         <FormField
-                                        control={form.control}
-                                        name="id"
-                                        render={({ field }) => (
-                                            <FormItem hidden>
-                                                <FormLabel>Id</FormLabel>
-                                                <FormControl>
-                                                    <Input {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
+                                            control={form.control}
+                                            name="id"
+                                            render={({ field }) => (
+                                                <FormItem hidden>
+                                                    <FormLabel>Id</FormLabel>
+                                                    <FormControl>
+                                                        <Input {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
                                     }
                                     <FormField
                                         control={form.control}
                                         name="title"
-                                        render={({ field: {onChange, ...rest} }) => (
+                                        render={({ field: { onChange, ...rest } }) => (
                                             <FormItem>
                                                 <FormLabel>Title</FormLabel>
                                                 <FormControl>
@@ -141,7 +140,7 @@ const MutateProductForm = ({
                                         )}
                                     />
                                     <div className='mt-5'>
-                                        
+
 
                                         <FormField
                                             control={form.control}
@@ -273,36 +272,53 @@ const MutateProductForm = ({
                                                     </FormControl>
                                                 </div>
                                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                                                    <FormControl>
-                                                        <FormField
-                                                            control={form.control}
-                                                            name='info.width'
-                                                            render={({ field }) => (
-                                                                <FormItem >
-                                                                    <FormLabel>Width</FormLabel>
-                                                                    <FormControl>
-                                                                        <Input type="number" placeholder="Product Width" {...field} />
-                                                                    </FormControl>
-                                                                    <FormMessage />
-                                                                </FormItem>
-                                                            )}
-                                                        />
-                                                    </FormControl>
-                                                    <FormControl>
-                                                        <FormField
-                                                            control={form.control}
-                                                            name='info.height'
-                                                            render={({ field }) => (
-                                                                <FormItem >
-                                                                    <FormLabel>Height</FormLabel>
-                                                                    <FormControl>
-                                                                        <Input type='number' placeholder="Product Height" {...field} />
-                                                                    </FormControl>
-                                                                    <FormMessage />
-                                                                </FormItem>
-                                                            )}
-                                                        />
-                                                    </FormControl>
+                                                    <div className="grid grid-cols-3 col-auto md:col-span-2 gap-5">
+                                                        <FormControl>
+                                                            <FormField
+                                                                control={form.control}
+                                                                name='info.width'
+                                                                render={({ field }) => (
+                                                                    <FormItem >
+                                                                        <FormLabel>Width</FormLabel>
+                                                                        <FormControl>
+                                                                            <Input type="number" placeholder="Product Width" {...field} />
+                                                                        </FormControl>
+                                                                        <FormMessage />
+                                                                    </FormItem>
+                                                                )}
+                                                            />
+                                                        </FormControl>
+                                                        <FormControl>
+                                                            <FormField
+                                                                control={form.control}
+                                                                name='info.height'
+                                                                render={({ field }) => (
+                                                                    <FormItem >
+                                                                        <FormLabel>Height</FormLabel>
+                                                                        <FormControl>
+                                                                            <Input type='number' placeholder="Product Height" {...field} />
+                                                                        </FormControl>
+                                                                        <FormMessage />
+                                                                    </FormItem>
+                                                                )}
+                                                            />
+                                                        </FormControl>
+                                                        <FormControl>
+                                                            <FormField
+                                                                control={form.control}
+                                                                name='info.length'
+                                                                render={({ field }) => (
+                                                                    <FormItem >
+                                                                        <FormLabel>Length</FormLabel>
+                                                                        <FormControl>
+                                                                            <Input type='number' placeholder="Product Length" {...field} />
+                                                                        </FormControl>
+                                                                        <FormMessage />
+                                                                    </FormItem>
+                                                                )}
+                                                            />
+                                                        </FormControl>
+                                                    </div>
                                                     <FormControl>
                                                         <FormField
                                                             control={form.control}
@@ -334,7 +350,7 @@ const MutateProductForm = ({
                             <div>
                                 <ThumbnailUploader value={data?.thumbnail} onImageUpload={(img) => {
                                     form.setValue('thumbnail', img)
-                                    
+
                                 }} />
                             </div>
                         </StickyBox>
