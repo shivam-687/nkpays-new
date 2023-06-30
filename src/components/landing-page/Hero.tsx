@@ -69,7 +69,6 @@ const Hero = () => {
           <div className='flex gap-4 mt-5 justify-center lg:justify-start' >
             <animated.div style={popTrail[0]}><LoginDropdown /></animated.div>
             <animated.div style={popTrail[1]}><AppDownloadButton /></animated.div>
-           
           </div>
         </div>
         <div className='relative '>

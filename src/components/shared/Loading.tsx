@@ -1,12 +1,18 @@
 import React from 'react'
 import {TailSpin} from 'react-loader-spinner'
 
-const Loading = () => {
+const Loading = ({
+  width = 50,
+  height = 50
+}: {
+  width?: number,
+  height?: number
+}) => {
   return (
     <div>
         <TailSpin
-        width={50}
-        height={50}
+        width={width}
+        height={height}
         color="black"
         />
     </div>

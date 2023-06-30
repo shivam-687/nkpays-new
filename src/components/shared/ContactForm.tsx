@@ -18,80 +18,54 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from '../ui/textarea'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+
 import { api } from '@/utils/api'
 import { toast } from 'react-toastify'
 import GreetAfterSubmissionDialog, { type HandleContactQueryGreetDialog } from '../contactQuery/GreetAfterSubmissionDialog'
+import { cn } from '@/lib/utils'
 
 
-const ContactForm = () => {
+const ContactForm = ({
+    onSubmit
+}: {
+    onSubmit?: () => void
+}) => {
     const createContactMutation = api.contact_query.create.useMutation()
     const form = useForm<z.infer<typeof CreateContactSchema>>({
         resolver: zodResolver(CreateContactSchema),
-        
     });
     const dialogRef = useRef<HandleContactQueryGreetDialog>(null);
 
 
-    async function onSubmit(values: CreateContactFormInput) {
+    async function onFormSubmit(values: CreateContactFormInput) {
         try {
             const res = await createContactMutation.mutateAsync({ ...values });
-            if(res){
+            if (res) {
                 dialogRef.current?.openDialog();
+                void onSubmit?.();
             }
             form.reset({});
-        } catch (error:any) {
+        } catch (error: any) {
             toast(error.message)
         }
     }
 
     return (
         <>
-        <GreetAfterSubmissionDialog ref={dialogRef} />
-        <Card className='border'>
-            <CardHeader>
-                <CardTitle>Contact Us Now!</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <Form {...form}
-                >
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                        <div className='grid grid-cols-2 gap-5'>
-                            <FormField
-                                control={form.control}
-                                name="name"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Name</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Your Name" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Your Email" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
+            <GreetAfterSubmissionDialog ref={dialogRef} />
+
+            <Form {...form}
+            >
+                <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-4">
+                    <div className='grid grid-cols-2 gap-5'>
                         <FormField
                             control={form.control}
-                            name="phone"
+                            name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Phone</FormLabel>
+                                    <FormLabel>Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Your Phone Number" {...field} />
+                                        <Input placeholder="Your Name" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -99,22 +73,48 @@ const ContactForm = () => {
                         />
                         <FormField
                             control={form.control}
-                            name="message"
+                            name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Message</FormLabel>
+                                    <FormLabel>Email</FormLabel>
                                     <FormControl>
-                                        <Textarea placeholder="Message..." {...field} />
+                                        <Input placeholder="Your Email" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        <Button className='w-full' variant={'glow'} type="submit">Submit</Button>
-                    </form>
-                </Form>
-            </CardContent>
-        </Card>
+                    </div>
+                    <FormField
+                        control={form.control}
+                        name="phone"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Phone</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Your Phone Number" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="message"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Message</FormLabel>
+                                <FormControl>
+                                    <Textarea placeholder="Message..." {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button className='w-full' variant={'glow'} type="submit">Submit</Button>
+                </form>
+            </Form>
+
         </>
     )
 }

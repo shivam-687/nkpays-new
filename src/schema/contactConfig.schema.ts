@@ -24,6 +24,8 @@ export const DeleteProductEnquirySchema = z.object({
     id: z.number()
 })
 
+export type ContactData = z.TypeOf<typeof CreateContactConfigSchema>
+
 
 
 

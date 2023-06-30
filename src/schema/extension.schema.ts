@@ -16,6 +16,7 @@ export const CreateGoogleMapExtensionSchema = z.object({
     active: z.boolean().default(true).optional()
 })
 
+
 export type CreateGoogleMapExtensionInput = z.TypeOf<typeof CreateGoogleMapExtensionSchema>;
 
 export type GoogleMapExtensionOutput = {
@@ -25,6 +26,26 @@ export type GoogleMapExtensionOutput = {
         apikey?: string,
         latitude?: string,
         longitude?: string,
+    },
+    active: boolean
+}
+
+export const CreateGoogleTagMangerExtensionSchema = z.object({
+    title: z.string().default('Google Map'),
+    data: z.object({
+        apiKey: z.string().optional(),
+        latitude: z.string().optional(),
+        longitude: z.string().optional()
+    }),
+    active: z.boolean().default(true).optional()
+})
+export type CreateGoogleTagMangerExtensionInput = z.TypeOf<typeof CreateGoogleTagMangerExtensionSchema>;
+
+export type CreateGoogleTagMangerExtensionOutput = {
+    id: number,
+    title: string,
+    data: {
+        code?: string,
     },
     active: boolean
 }
@@ -60,7 +81,8 @@ export type TwakTooSettingOutput = {
 export const CreateWhatsappSettingSchema = z.object({
     title: z.string().default('twak_too'),
     data: z.object({
-        number: z.string().optional()
+        number: z.string().optional(),
+        greetMessage: z.string().optional()
     }),
     active: z.boolean().default(true).optional()
 })
@@ -78,7 +100,8 @@ export type WhatsappSettingOutput = {
     id: number,
     title: string,
     data: {
-        number?: string
+        number?: string,
+        greetMessage?: string
     },
     active: boolean
 }

@@ -8,7 +8,6 @@ import Section from "@/components/shared/Section";
 import ServiceViwer from "@/components/shared/ServiceViwer";
 import Testimonial from "@/components/shared/Testimonial";
 import { type NextPage } from "next";
-import Head from "next/head";
 import { NextSeo } from 'next-seo';
 import { env } from "@/env.mjs";
 

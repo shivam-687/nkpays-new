@@ -3,11 +3,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-
-import React, { useEffect } from 'react'
+import { type CreateContactFormInput, CreateContactSchema } from '@/schema/contactForm.schema'
+import React, { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { type z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
+
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -21,32 +22,31 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { api } from '@/utils/api'
 import { toast } from 'react-toastify'
-import { type UpdateExtensionInput, TwakTooSettingOutput, CreateTwakTooSettingSchema, CreateTwakTooSettingInput, UpdateTwakTooSettingInput, UpdateTwakTooSettingSchema, WhatsappSettingOutput, CreateWhatsappSettingInput, UpdateWhatsappSettingInput } from '@/schema/extension.schema'
+import { type UpdateExtensionInput, UpdateExtensionSchema, CreateGoogleTagMangerExtensionSchema, CreateGoogleTagMangerExtensionInput, CreateGoogleTagMangerExtensionOutput } from '@/schema/extension.schema'
 
 
-const WhatsappSetting = ({ data }: { data?: WhatsappSettingOutput }) => {
-    const title = 'whatsapp';
+const GoogleTagManagerSetting = ({ data }: { data?: CreateGoogleTagMangerExtensionOutput }) => {
+    const title = 'google_tag_manager';
     const createExtensionMutation = api.extension.create.useMutation()
     const updateExtensionMutation = api.extension.update.useMutation()
     const ctx = api.useContext().extension;
-    const form = useForm<CreateWhatsappSettingInput|UpdateWhatsappSettingInput>({
-        resolver: zodResolver(data ? UpdateTwakTooSettingSchema : CreateTwakTooSettingSchema),
+    const form = useForm<z.infer<typeof CreateGoogleTagMangerExtensionSchema> | UpdateExtensionInput>({
+        resolver: zodResolver(data ? UpdateExtensionSchema : CreateGoogleTagMangerExtensionSchema),
         defaultValues: data ? { ...data } : { title }
     });
 
 
-    async function onSubmit(values: CreateWhatsappSettingInput|UpdateWhatsappSettingInput) {
+    async function onSubmit(values: CreateGoogleTagMangerExtensionInput | UpdateExtensionInput) {
         try {
             if (data) {
                 await updateExtensionMutation.mutateAsync({ ...values as UpdateExtensionInput });
             } else {
-                await createExtensionMutation.mutateAsync({ ...values as CreateWhatsappSettingInput });
-                
+                await createExtensionMutation.mutateAsync({ ...values as CreateGoogleTagMangerExtensionInput });
             }
-            toast.success('Whatsapp Setting saved')
+            toast.success('Google Tag Manager Setting saved successfully')
             void ctx.invalidate()
         } catch (error: any) {
-            toast(error.message)
+            toast.error(error.message)
         }
     }
 
@@ -64,7 +64,7 @@ const WhatsappSetting = ({ data }: { data?: WhatsappSettingOutput }) => {
         <>
             <Card className='border-0'>
                 <CardHeader>
-                    <CardTitle>Whatsapp Setting</CardTitle>
+                    <CardTitle>Google Tag Manager</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <Form {...form}
@@ -101,23 +101,10 @@ const WhatsappSetting = ({ data }: { data?: WhatsappSettingOutput }) => {
                             />
                             <FormField
                                 control={form.control}
-                                name="data.number"
+                                name="data.code"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Whatsapp Number</FormLabel>
-                                        <FormControl>
-                                            <Input  {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="data.greetMessage"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Greet Message</FormLabel>
+                                        <FormLabel>Code</FormLabel>
                                         <FormControl>
                                             <Input  {...field} />
                                         </FormControl>
@@ -140,4 +127,4 @@ const WhatsappSetting = ({ data }: { data?: WhatsappSettingOutput }) => {
     )
 }
 
-export default WhatsappSetting
+export default GoogleTagManagerSetting
