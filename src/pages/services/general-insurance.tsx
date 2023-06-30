@@ -4,8 +4,10 @@ import InfoCard from '@/components/shared/InfoCard'
 import Section from '@/components/shared/Section'
 import PageHero from '@/components/shared/page/PageHero'
 import { Button } from '@/components/ui/button'
+import { env } from '@/env.mjs'
 import { CheckCircle } from 'lucide-react'
 import { nanoid } from 'nanoid'
+import { NextSeo } from 'next-seo'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -44,6 +46,20 @@ const content = {
 const AepsPage = () => {
     return (
         <>
+            <NextSeo
+                title={content.hero.titles.join(' ')}
+                description={content.hero.desc}
+                openGraph={{
+                    title: content.hero.titles.join(' '),
+                    description: content.hero.desc,
+                    url: env.NEXT_PUBLIC_SITE_URL,
+                    images: []
+                }}
+                twitter={{
+                    cardType: 'summary_large_image',
+                }}
+            />
+
             <PageHero
                 titles={content.hero.titles}
                 image={content.hero.image}
@@ -71,7 +87,7 @@ const AepsPage = () => {
                 </div>
             </Section>
 
-        
+
             <section className='py-10'>
                 <div className="grid grid-cols-1 md:grid-cols-2 container mx-auto px-4 justify-center items-center">
                     <div>
@@ -109,11 +125,11 @@ const AepsPage = () => {
             </section>
             <section className='py-10'>
                 <div className="grid grid-cols-1 md:grid-cols-2 container mx-auto px-4 justify-center items-center">
-                    
+
                     <div>
                         <div className="max-w-lg">
                             <h2 className='mb-3 text-3xl font-medium'>Partnership Benefits</h2>
-                           
+
                             <ul className='text-gray-500 mt-4'>
                                 <li className='flex items-center gap-3'>
                                     <span><CheckCircle className='w-6 h-6 text-primary' /></span>
@@ -135,7 +151,7 @@ const AepsPage = () => {
                                     <span><CheckCircle className='w-6 h-6 text-primary' /></span>
                                     <span>{`As a General Insurance Partner, you can tap into a growing market, capitalize on cross-selling opportunities, and achieve sustainable business growth.`}</span>
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -145,10 +161,10 @@ const AepsPage = () => {
                     </div>
                 </div>
             </section>
-            
 
-            <DownloadAppSection/>
-            <ContactSection/>
+
+            <DownloadAppSection />
+            <ContactSection />
         </>
     )
 }

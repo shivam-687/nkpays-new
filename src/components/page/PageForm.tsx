@@ -27,6 +27,8 @@ import { Button } from '../ui/button'
 
 import slugify from 'slugify'
 import { convertNullToUndefined } from '@/lib/utils'
+import { Separator } from '../ui/separator'
+import { Textarea } from '../ui/textarea'
 
 
 export type MutatePageFormProps = {
@@ -145,6 +147,44 @@ const PageForm = ({
                                     </FormItem>
                                 )}
                             />
+
+                            <Separator className='my-5' />
+
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>SEO</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="space-y-4">
+                                        <FormField
+                                            control={form.control}
+                                            name="meta.seoTitle"
+                                            render={({ field: { ...rest } }) => (
+                                                <FormItem>
+                                                    <FormLabel>Title</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="Page SEO Title" {...rest} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="meta.seoDesc"
+                                            render={({ field: { ...rest } }) => (
+                                                <FormItem>
+                                                    <FormLabel>Title</FormLabel>
+                                                    <FormControl>
+                                                        <Textarea placeholder="Page SEO Dscription" {...rest} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+                                </CardContent>
+                            </Card>
 
                             {/* <div className='flex justify-end items-center'>
                                 <Button disabled={createPageMutation.isLoading || updatePageMutation.isLoading} type='submit'>Save</Button>

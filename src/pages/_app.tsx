@@ -13,7 +13,8 @@ import SiteLoader from "@/components/shared/SiteLoader";
 import LayoutSwitcher from "@/components/layout/LayoutSwitcher";
 
 import NextNProgress from 'nextjs-progressbar'
-
+import { DefaultSeo } from 'next-seo';
+import { env } from "@/env.mjs";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -21,6 +22,17 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
+      <DefaultSeo
+          openGraph={{
+            type: 'website',
+            locale: 'en_IN',
+            url: env.NEXT_PUBLIC_SITE_URL,
+            siteName: 'NKPays',
+          }}
+          twitter={{
+            cardType: 'summary_large_image',
+          }}
+        />
       <NextNProgress />
       <ToastContainer/>
       <SiteLoader>

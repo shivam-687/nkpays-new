@@ -133,6 +133,9 @@ dependencies:
   next-connect:
     specifier: ^1.0.0
     version: 1.0.0
+  next-seo:
+    specifier: ^6.1.0
+    version: 6.1.0(next@13.4.2)(react-dom@18.2.0)(react@18.2.0)
   nextjs-progressbar:
     specifier: ^0.0.16
     version: 0.0.16(next@13.4.2)(react@18.2.0)
@@ -4065,6 +4068,18 @@ packages:
     dependencies:
       '@tsconfig/node16': 1.0.4
       regexparam: 2.0.1
+    dev: false
+
+  /next-seo@6.1.0(next@13.4.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-iMBpFoJsR5zWhguHJvsoBDxDSmdYTHtnVPB1ij+CD0NReQCP78ZxxbdL9qkKIf4oEuZEqZkrjAQLB0bkII7RYA==}
+    peerDependencies:
+      next: ^8.1.1-canary.54 || >=9.0.0
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+    dependencies:
+      next: 13.4.2(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /next-tick@1.1.0:

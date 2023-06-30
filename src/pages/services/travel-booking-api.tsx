@@ -4,8 +4,10 @@ import InfoCard from '@/components/shared/InfoCard'
 import Section from '@/components/shared/Section'
 import PageHero from '@/components/shared/page/PageHero'
 import { Button } from '@/components/ui/button'
+import { env } from '@/env.mjs'
 import { CheckCircle } from 'lucide-react'
 import { nanoid } from 'nanoid'
+import { NextSeo } from 'next-seo'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -44,6 +46,20 @@ const content = {
 const TarvelBookingPage = () => {
     return (
         <>
+
+            <NextSeo
+                title={content.hero.titles.join(' ')}
+                description={content.hero.desc}
+                openGraph={{
+                    title: content.hero.titles.join(' '),
+                    description: content.hero.desc,
+                    url: env.NEXT_PUBLIC_SITE_URL,
+                    images: []
+                }}
+                twitter={{
+                    cardType: 'summary_large_image',
+                }}
+            />
             <PageHero
                 titles={content.hero.titles}
                 image={content.hero.image}

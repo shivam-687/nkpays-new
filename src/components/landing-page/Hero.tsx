@@ -40,8 +40,8 @@ const Hero = () => {
   })
 
   return (
-    <section className="py-20 lg:py-0 lg:min-h-[100vh]  relative ">
-      <div className='container grid grid-cols-1 lg:grid-cols-2 items-center'>
+    <section className="py-20 lg:py-0 lg:min-h-[100vh]  relative bg-center bg-cover bg-no-repeat">
+      <div className='container grid grid-cols-1 lg:grid-cols-2 items-center bg-left bg-cover bg-no-repeat'>
         <div className="content py-10 max-w-lg mx-auto">
           <div className='text-4xl space-y-2 text-center md:text-5xl lg:text-5xl font-bold lg:text-left'>
             {

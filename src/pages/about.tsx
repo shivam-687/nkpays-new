@@ -7,6 +7,8 @@ import DownloadAppSection from '@/components/shared/DownloadAppSection'
 import LogoCarousel from '@/components/shared/LogoCarousel'
 import ContactSection from '@/components/landing-page/ContactSection'
 import InfoCard from '@/components/shared/InfoCard'
+import { NextSeo } from 'next-seo'
+import { env } from '@/env.mjs'
 
 
 const content = {
@@ -54,8 +56,25 @@ const content = {
 }
 
 const AboutPage = () => {
+
+    const title = '';
+  const desc = ''; 
+  
     return (
         <>
+        <NextSeo
+        title={title}
+        description={desc}
+        openGraph={{
+          title: title,
+          description: desc,
+          url: env.NEXT_PUBLIC_SITE_URL,
+          images: []
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+        }}
+      />
             <section className='h-64 bg-primary/30  relative'>
                 <div className='grid place-content-center z-20 backdrop-blur-lg w-full h-full'><h1 className='text-6xl font-bold'>About Us</h1></div>
 

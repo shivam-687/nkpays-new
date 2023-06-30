@@ -11,6 +11,9 @@ import { appRouter } from '@/server/api/root';
 import SuperJSON from 'superjson';
 
 import PageViwer from '@/components/page/PageViwer';
+import { NextSeo } from 'next-seo';
+import { PageData } from '@/schema/page.schema';
+import { env } from '@/env.mjs';
 
 export async function getServerSideProps(
     context: GetServerSidePropsContext<{ slug: string }>
@@ -34,7 +37,7 @@ export async function getServerSideProps(
     return {
         props: {
             trpcState: helpers.dehydrate(),
-            page: JSON.parse(JSON.stringify(res))
+            page: JSON.parse(JSON.stringify(res)) as PageData
         }
     }
 }
@@ -44,6 +47,20 @@ const ViewPage = ({ page }: InferGetServerSidePropsType<typeof getServerSideProp
 
     return (
         <div>
+            
+            <NextSeo
+                title={page.meta?.seoTitle||''}
+                description={page.meta?.seoDesc}
+                openGraph={{
+                    title: page.meta?.seoTitle,
+                    description: page.meta?.seoTitle,
+                    url: env.NEXT_PUBLIC_SITE_URL,
+                    images: []
+                }}
+                twitter={{
+                    cardType: 'summary_large_image',
+                }}
+            />
             <PageViwer page={page} />
         </div>
     )

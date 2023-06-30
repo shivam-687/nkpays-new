@@ -8,6 +8,8 @@ import React from 'react'
 import Image from 'next/image';
 import DownloadAppSection from '@/components/shared/DownloadAppSection'
 import ContactSection from '@/components/landing-page/ContactSection'
+import { NextSeo } from 'next-seo'
+import { env } from '@/env.mjs'
 
 const content = {
     hero: {
@@ -55,6 +57,19 @@ const content = {
 const DMTServicePage = () => {
     return (
         <>
+            <NextSeo
+                title={content.hero.titles.join(' ')}
+                description={content.hero.desc}
+                openGraph={{
+                    title: content.hero.titles.join(' '),
+                    description: content.hero.desc,
+                    url: env.NEXT_PUBLIC_SITE_URL,
+                    images: []
+                }}
+                twitter={{
+                    cardType: 'summary_large_image',
+                }}
+            />
             <PageHero
                 titles={content.hero.titles}
                 image={content.hero.image}
@@ -72,81 +87,81 @@ const DMTServicePage = () => {
             </Section>
 
             <article className='mx-auto max-w-6xl'>
-            <section className='py-20 bg-primary/10'>
-                <div className="grid grid-cols-1 md:grid-cols-2 container mx-auto px-4 justify-center">
-                    <div className='aspect-video relative'>
-                        <Image alt="What-is-AEPS" src="/assets/images/Money-Transfer-2.png" width={500} height={500} />
-                    </div>
-                    <div>
-                        <div className="max-w-lg ">
-                            <h2 className='mb-3 text-3xl font-medium'>Benefits of starting your <span className='text-primary'>online Money Transfer</span> business</h2>
-                            <div className='text-muted-foreground'>
-                                <p className=''>Once the AEPS Agent registration is done, your NKPays AEPS Agent login id will be generated. The process of AEPS is very simple.</p>
-                                <ul className=' mt-4 space-y-4'>
-                                    <li className='flex  gap-3'>
-                                        <span><CheckCircle className='w-6 h-6 text-primary' /></span>
-                                        <span>Instant and real-time commission on every transaction.</span>
-                                    </li>
-                                    <li className='flex  gap-3'>
-                                        <span><CheckCircle className='w-6 h-6 text-primary' /></span>
-                                        <span>Great Income opportunity without any investment as Money Transfer Distributor.</span>
-                                    </li>
-                                    <li className='flex gap-3'>
-                                        <span><CheckCircle className='w-6 h-6 text-primary' /></span>
-                                        <span>Money remittance service will attract more customers to your outlet by improving your service portfolio.</span>
-                                    </li>
-                                    <li className='flex  gap-3'>
-                                        <span><CheckCircle className='w-6 h-6 text-primary' /></span>
-                                        <span>Save time conduct transactions through Biznext Mobile App or Web Portal.</span>
-                                    </li>
-                                
-                                </ul>
-                            </div>
+                <section className='py-20 bg-primary/10'>
+                    <div className="grid grid-cols-1 md:grid-cols-2 container mx-auto px-4 justify-center">
+                        <div className='aspect-video relative'>
+                            <Image alt="What-is-AEPS" src="/assets/images/Money-Transfer-2.png" width={500} height={500} />
                         </div>
-                    </div>
-                </div>
-            </section>
-            <section className='py-10 '>
-                <div className="grid grid-cols-1 md:grid-cols-2 container mx-auto px-4 justify-center">
-                    
-                    <div>
-                        <div className="max-w-lg ">
-                            <h2 className='mb-3 text-3xl font-medium'>Benefits of starting your <span className='text-primary'>Why</span> NKPays</h2>
-                            <div className='text-muted-foreground'>
-                                <p className=''>Once the AEPS Agent registration is done, your NKPays AEPS Agent login id will be generated. The process of AEPS is very simple.</p>
-                                <ul className=' mt-4 space-y-4'>
-                                    <li className='flex  gap-3'>
-                                        <span><CheckCircle className='w-6 h-6 text-primary' /></span>
-                                        <span>Instant and real-time commission on every transaction.</span>
-                                    </li>
-                                    <li className='flex  gap-3'>
-                                        <span><CheckCircle className='w-6 h-6 text-primary' /></span>
-                                        <span>Great Income opportunity without any investment as Money Transfer Distributor.</span>
-                                    </li>
-                                    <li className='flex gap-3'>
-                                        <span><CheckCircle className='w-6 h-6 text-primary' /></span>
-                                        <span>Money remittance service will attract more customers to your outlet by improving your service portfolio.</span>
-                                    </li>
-                                    <li className='flex  gap-3'>
-                                        <span><CheckCircle className='w-6 h-6 text-primary' /></span>
-                                        <span>Save time conduct transactions through Biznext Mobile App or Web Portal.</span>
-                                    </li>
-                                
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                        <div>
+                            <div className="max-w-lg ">
+                                <h2 className='mb-3 text-3xl font-medium'>Benefits of starting your <span className='text-primary'>online Money Transfer</span> business</h2>
+                                <div className='text-muted-foreground'>
+                                    <p className=''>Once the AEPS Agent registration is done, your NKPays AEPS Agent login id will be generated. The process of AEPS is very simple.</p>
+                                    <ul className=' mt-4 space-y-4'>
+                                        <li className='flex  gap-3'>
+                                            <span><CheckCircle className='w-6 h-6 text-primary' /></span>
+                                            <span>Instant and real-time commission on every transaction.</span>
+                                        </li>
+                                        <li className='flex  gap-3'>
+                                            <span><CheckCircle className='w-6 h-6 text-primary' /></span>
+                                            <span>Great Income opportunity without any investment as Money Transfer Distributor.</span>
+                                        </li>
+                                        <li className='flex gap-3'>
+                                            <span><CheckCircle className='w-6 h-6 text-primary' /></span>
+                                            <span>Money remittance service will attract more customers to your outlet by improving your service portfolio.</span>
+                                        </li>
+                                        <li className='flex  gap-3'>
+                                            <span><CheckCircle className='w-6 h-6 text-primary' /></span>
+                                            <span>Save time conduct transactions through Biznext Mobile App or Web Portal.</span>
+                                        </li>
 
-                    <div className='aspect-video relative'>
-                        <Image alt="Why Nkpays?" src="/assets/images/why-nkpays.png" width={500} height={500} />
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+                <section className='py-10 '>
+                    <div className="grid grid-cols-1 md:grid-cols-2 container mx-auto px-4 justify-center">
+
+                        <div>
+                            <div className="max-w-lg ">
+                                <h2 className='mb-3 text-3xl font-medium'>Benefits of starting your <span className='text-primary'>Why</span> NKPays</h2>
+                                <div className='text-muted-foreground'>
+                                    <p className=''>Once the AEPS Agent registration is done, your NKPays AEPS Agent login id will be generated. The process of AEPS is very simple.</p>
+                                    <ul className=' mt-4 space-y-4'>
+                                        <li className='flex  gap-3'>
+                                            <span><CheckCircle className='w-6 h-6 text-primary' /></span>
+                                            <span>Instant and real-time commission on every transaction.</span>
+                                        </li>
+                                        <li className='flex  gap-3'>
+                                            <span><CheckCircle className='w-6 h-6 text-primary' /></span>
+                                            <span>Great Income opportunity without any investment as Money Transfer Distributor.</span>
+                                        </li>
+                                        <li className='flex gap-3'>
+                                            <span><CheckCircle className='w-6 h-6 text-primary' /></span>
+                                            <span>Money remittance service will attract more customers to your outlet by improving your service portfolio.</span>
+                                        </li>
+                                        <li className='flex  gap-3'>
+                                            <span><CheckCircle className='w-6 h-6 text-primary' /></span>
+                                            <span>Save time conduct transactions through Biznext Mobile App or Web Portal.</span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='aspect-video relative'>
+                            <Image alt="Why Nkpays?" src="/assets/images/why-nkpays.png" width={500} height={500} />
+                        </div>
+                    </div>
+                </section>
 
             </article>
 
-            <DownloadAppSection/>
-            <ContactSection/>
+            <DownloadAppSection />
+            <ContactSection />
         </>
     )
 }

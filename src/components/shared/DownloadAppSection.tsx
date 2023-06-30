@@ -50,31 +50,23 @@ const Slide = ({ imageUrl, link, titleArray = [], desc }: { imageUrl: string, li
 }
 
 const DownloadAppSection = () => {
-    const images = [
-        '/assets/images/app.png',
-        '/assets/images/app.png',
-        '/assets/images/app.png',
-        '/assets/images/app.png',
-        '/assets/images/app.png',
-        '/assets/images/app.png',
-    ]
+    
 
     const slideContent = [
         {
-            image: '/assets/images/app.png',
+            image: '/assets/images/app-1.png',
             titleArray: [
-                'Download NKPays',
-                'Application from',
-                'Google PlayStore'
+                'Download NKPays LITE',
+                'Application',
             ],
             button: {
                 link: '#',
                 text: 'Download Now'
             },
-            desc: `Signup and create your account. In 48 hours you can start your own business and increase your income`
+            desc: `Nkpays LIte is a company specializes in Mobile, Data Card and Dth recharge technologies.`
         },
         {
-            image: '/assets/images/app.png',
+            image: '/assets/images/app-2.png',
             titleArray: [
                 'Download NKPays',
                 'Banking Application',
@@ -84,10 +76,10 @@ const DownloadAppSection = () => {
                 link: '#',
                 text: 'Download Now'
             },
-            desc: `Signup and create your account. In 48 hours you can start your own business and increase your income`
+            desc: `BBPS, Booking, Recharges, Bill Payments, FastTag, All in One Place`
         },
         {
-            image: '/assets/images/app.png',
+            image: '/assets/images/app-1.png',
             titleArray: [
                 'Download NKPays',
                 'Application from',
@@ -97,10 +89,10 @@ const DownloadAppSection = () => {
                 link: '#',
                 text: 'Download Now'
             },
-            desc: `Signup and create your account. In 48 hours you can start your own business and increase your income`
+            desc: `Nkpays LIte is a company specializes in Mobile, Data Card and Dth recharge technologies.`
         },
         {
-            image: '/assets/images/app.png',
+            image: '/assets/images/app-2.png',
             titleArray: [
                 'Download NKPays',
                 'Banking Application',
@@ -110,7 +102,7 @@ const DownloadAppSection = () => {
                 link: '#',
                 text: 'Download Now'
             },
-            desc: `Signup and create your account. In 48 hours you can start your own business and increase your income`
+            desc: `BBPS, Booking, Recharges, Bill Payments, FastTag, All in One Place.`
         },
 
     ]

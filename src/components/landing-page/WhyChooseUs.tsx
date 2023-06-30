@@ -62,13 +62,13 @@ const WhyChooseUsCard = ({
 }
 
 
-const MobilePan = ({ imageUrl }: { imageUrl: string }) => {
+const MobilePan = ({ imageUrl, link }: { imageUrl: string, link?: string }) => {
     return (
         <div className='max-w-xs mx-auto lg:mx-0 relative'>
             <Image alt="" src={imageUrl} width={500} height={1052} />
             <Fade direction='down' className='absolute w-full bottom-0 left-0 flex justify-center'>
                 <div className='max-w-xs mx-auto rounded-xl border border-primary/60 backdrop-blur-md bg-white/30 flex items-center justify-center p-5 '>
-                    <AppDownloadButton />
+                    <AppDownloadButton href={link} />
                 </div>
             </Fade>
         </div>
@@ -79,13 +79,38 @@ const WhyChooseUs = () => {
     const [ref, inView] = useInView()
     const [trail, api] = useTrail(4, () => ({ delay: 2000, from: { opacity: 0, scale: '0.7' }, to: { opacity: 1, scale: '1' } }), [inView])
 
-    const appImages = [
-        '/assets/images/app.png',
-        '/assets/images/app.png',
-        '/assets/images/app.png',
-        '/assets/images/app.png',
-        '/assets/images/app.png',
-        '/assets/images/app.png',
+
+    const appSlides = [
+        {
+            imageUrl: '/assets/images/app-2.png',
+            link: 'https://play.google.com/store/apps/details?id=com.nkpays.nkpays',
+            title: 'NKPays Banking Services'
+        },
+        {
+            imageUrl: '/assets/images/app-1.png',
+            link: 'https://play.google.com/store/apps/details?id=com.nkpaysapp',
+            title: 'NKPays Lite Recharge & Bill Payment'
+        },
+        {
+            imageUrl: '/assets/images/app-2.png',
+            link: 'https://play.google.com/store/apps/details?id=com.nkpays.nkpays',
+            title: 'NKPays Banking Services'
+        },
+        {
+            imageUrl: '/assets/images/app-1.png',
+            link: 'https://play.google.com/store/apps/details?id=com.nkpaysapp',
+            title: 'NKPays Lite Recharge & Bill Payment'
+        },
+        {
+            imageUrl: '/assets/images/app-2.png',
+            link: 'https://play.google.com/store/apps/details?id=com.nkpays.nkpays',
+            title: 'NKPays Banking Services'
+        },
+        {
+            imageUrl: '/assets/images/app-1.png',
+            link: 'https://play.google.com/store/apps/details?id=com.nkpaysapp',
+            title: 'NKPays Lite Recharge & Bill Payment'
+        },
     ]
 
     return (
@@ -134,9 +159,9 @@ const WhyChooseUs = () => {
                 >
 
                     {
-                        appImages.map(img => {
+                        appSlides.map(slide => {
                             return <SwiperSlide key={nanoid()}>
-                                 <MobilePan imageUrl={img} />
+                                 <MobilePan imageUrl={slide.imageUrl} link={slide.link} />
                             </SwiperSlide>
                         })
                     }
