@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, { type PropsWithChildren } from 'react'
 import Logo from './Logo'
 import { ChevronRight, FacebookIcon, Instagram, Linkedin, TwitterIcon } from 'lucide-react'
 import { nanoid } from 'nanoid'
@@ -63,7 +63,7 @@ const Footer = () => {
         },
         {
             lable: 'Terms & Conditions',
-            link: '#'
+            link: '/terms-and-conditions'
         },
         {
             lable: 'Refund Policy',

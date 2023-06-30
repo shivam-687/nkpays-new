@@ -22,7 +22,7 @@ import { api } from '@/utils/api'
 import { toast } from 'react-toastify'
 import Editor from '../shared/Editor'
 import { CreatePageSchema, UpdatePageSchema } from '@/schema/page.schema'
-import { Page } from '@prisma/client'
+import { type Page } from '@prisma/client'
 import { Button } from '../ui/button'
 
 import slugify from 'slugify'
@@ -47,7 +47,7 @@ const PageForm = ({
 
     const form = useForm<z.infer<typeof CreatePageSchema> | z.infer<typeof UpdatePageSchema>>({
         resolver: zodResolver(data ? UpdatePageSchema : CreatePageSchema),
-        defaultValues: data &&  {...convertNullToUndefined(data) } 
+        defaultValues: data && { ...convertNullToUndefined(data) }
     });
 
 
@@ -55,11 +55,11 @@ const PageForm = ({
 
         try {
             if (data) {
-                const res = await updatePageMutation.mutateAsync({...values as z.infer<typeof UpdatePageSchema>});
+                const res = await updatePageMutation.mutateAsync({ ...values as z.infer<typeof UpdatePageSchema> });
                 onMutate?.(res);
                 toast.success('Page content update successfully!')
             } else {
-                const res = await createPageMutation.mutateAsync({...values as z.infer<typeof CreatePageSchema>});
+                const res = await createPageMutation.mutateAsync({ ...values as z.infer<typeof CreatePageSchema> });
                 onMutate?.(res);
                 toast.success('Page content successfully!')
                 form.reset({});
@@ -73,17 +73,17 @@ const PageForm = ({
 
     return (
         <>
-                    <Form {...form}
-                    >
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <Card className='border'>
-                <CardHeader>
-                    <div className='flex justify-between items-center '>
-                    <CardTitle>{data ? 'Update Page Content' : 'Create Page content'}</CardTitle>
-                        <Button disabled={createPageMutation.isLoading || updatePageMutation.isLoading} type='submit'>Save</Button>
-                        </div>
-                </CardHeader>
-                <CardContent>
+            <Form {...form}
+            >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <Card className='border'>
+                        <CardHeader>
+                            <div className='flex justify-between items-center '>
+                                <CardTitle>{data ? 'Update Page Content' : 'Create Page content'}</CardTitle>
+                                <Button disabled={createPageMutation.isLoading || updatePageMutation.isLoading} type='submit'>Save</Button>
+                            </div>
+                        </CardHeader>
+                        <CardContent>
 
 
                             {
@@ -106,14 +106,14 @@ const PageForm = ({
                             <FormField
                                 control={form.control}
                                 name="name"
-                                render={({ field: {onChange, ...rest } }) => (
+                                render={({ field: { onChange, ...rest } }) => (
                                     <FormItem>
                                         <FormLabel>Title</FormLabel>
                                         <FormControl>
                                             <Input placeholder="Page Title" {...rest} onChange={e => {
-                                                        onChange(e);
-                                                        form.setValue('slug', slugify(e.target.value.toLowerCase() || ''))
-                                                    }} />
+                                                onChange(e);
+                                                form.setValue('slug', slugify(e.target.value.toLowerCase() || ''))
+                                            }} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -149,10 +149,10 @@ const PageForm = ({
                             {/* <div className='flex justify-end items-center'>
                                 <Button disabled={createPageMutation.isLoading || updatePageMutation.isLoading} type='submit'>Save</Button>
                             </div> */}
-                </CardContent>
-            </Card>
-                        </form>
-                    </Form>
+                        </CardContent>
+                    </Card>
+                </form>
+            </Form>
         </>
     )
 }
