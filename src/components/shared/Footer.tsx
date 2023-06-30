@@ -67,7 +67,7 @@ const Footer = () => {
         },
         {
             lable: 'Refund Policy',
-            link: '#'
+            link: 'refund-policy'
         }
     ]
   return (
