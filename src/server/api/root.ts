@@ -6,6 +6,7 @@ import { LoginLinkRouter } from './routers/loginLink';
 import { ProductEnquiryRouter } from './routers/productQuery';
 import { ContactConfigRouter } from './routers/contactConfig';
 import { ExtensionRouter } from './routers/extensions';
+import { PageRouter } from './routers/page';
 
 /**
  * This is the primary router for your server.
@@ -19,7 +20,8 @@ export const appRouter = createTRPCRouter({
   product: ProductRouter,
   product_enquiry: ProductEnquiryRouter,
   contactInfo: ContactConfigRouter,
-  extension: ExtensionRouter
+  extension: ExtensionRouter,
+  page: PageRouter
 });
 
 // export type definition of API

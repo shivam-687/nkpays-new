@@ -59,7 +59,7 @@ const Footer = () => {
     const legals = [
         {
             lable: 'Privacy Policy',
-            link: '#'
+            link: '/privacy-policy'
         },
         {
             lable: 'Terms & Conditions',

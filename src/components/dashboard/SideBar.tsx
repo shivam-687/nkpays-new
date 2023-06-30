@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React, { PropsWithChildren, ReactElement, ReactNode } from 'react'
 import Logo from '../shared/Logo'
-import { Archive, BadgeDollarSign, LayoutDashboard, Link2, LucidePhoneCall, Mail, MessageSquareDashed, Settings, ShoppingBag } from 'lucide-react'
+import { Archive, BadgeDollarSign, File, LayoutDashboard, Link2, LucidePhoneCall, Mail, MessageSquareDashed, Settings, ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { cn } from '@/lib/utils'
@@ -68,6 +68,11 @@ const SideBar = ({
             lable: 'Login Links',
             link: '/admin/loginlinks',
             icon: <Link2 />
+        },
+        {
+            lable: 'Pages',
+            link: '/admin/page',
+            icon: <File />
         },
     ]
     return (

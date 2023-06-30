@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { TailSpin } from "react-loader-spinner"
-import { convertNullToUndefiend } from "@/lib/utils"
+import { convertNullToUndefined } from "@/lib/utils"
 import { signOut, useSession } from "next-auth/react"
 
 export function UserNav() {
@@ -45,8 +45,8 @@ export function UserNav() {
             </Avatar>
             :
             <Avatar className="cursor-pointer shadow ring-2 w-8 h-8 hover:ring-4 transition-all   ring-green-700">
-              <AvatarImage src={convertNullToUndefiend(session?.user.image)}></AvatarImage>
-              <AvatarFallback >{convertNullToUndefiend(session?.user.name?.charAt(0))}</AvatarFallback>
+              <AvatarImage src={convertNullToUndefined(session?.user.image) as string}></AvatarImage>
+              <AvatarFallback >{convertNullToUndefined(session?.user.name?.charAt(0))}</AvatarFallback>
             </Avatar>
           }
         </Button>

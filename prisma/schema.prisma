@@ -90,10 +90,10 @@ model Product {
     info           Json?
     gallery        Json?
     slug           String
-    price          String?           
+    price          String?
     createdAt      DateTime         @default(now())
     updatedAt      DateTime         @updatedAt()
-    ProductEnquiry ProductEnquiry[] 
+    ProductEnquiry ProductEnquiry[]
 }
 
 model ProductEnquiry {
@@ -119,7 +119,7 @@ model LoginLink {
 model Contact {
     id        Int      @id @default(autoincrement())
     title     String?
-    address   Json? 
+    address   Json?
     email     Json?
     phone     Json?
     createdAt DateTime @default(now())
@@ -133,8 +133,18 @@ model Social {
 }
 
 model Extension {
-    id Int    @id @default(autoincrement())
-    title String
-    data    Json
-    active  Boolean? @default(true)
+    id     Int      @id @default(autoincrement())
+    title  String
+    data   Json
+    active Boolean? @default(true)
+}
+
+model Page {
+    id        Int      @id @default(autoincrement())
+    name      String   @unique
+    slug      String?
+    content   String?  @db.Text
+    meta      Json?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }

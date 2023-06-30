@@ -27,7 +27,7 @@ export const LoginLinkRouter = createTRPCRouter({
         }
     }),
 
-  getAll: protectedProcedure.input(ListLoginLinkSchema).query(async({ ctx, input }) => {
+  getAll: publicProcedure.input(ListLoginLinkSchema).query(async({ ctx, input }) => {
     const {search, sortBy, pagination} = input;
     const res = await paginate<LoginLink, Prisma.LoginLinkFindManyArgs>(ctx.prisma.loginLink, {
         where: search ? {
