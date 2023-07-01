@@ -47,7 +47,7 @@ const NavLink = ({ children, ...props }: PropsWithChildren<LinkProps>) => {
 
 
   useEffect(() => {
-    const active = router.asPath.startsWith(props.href.toString());
+    const active = router.asPath === props.href.toString();
     setIsActive(active)
   }, [router])
   return (
@@ -66,7 +66,7 @@ const Nav = () => {
   }
 
   return (
-    <nav className=''>
+    <nav className='backdrop-blur bg-white/50 border-b border-white z-50'>
       <div className="container mx-auto flex items-center justify-between py-2 ">
         <div className="flex-grow-0 w-36 md:w-max"><Logo /></div>
 

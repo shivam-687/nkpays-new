@@ -20,9 +20,10 @@ import {
 import { PropsWithChildren } from "react";
 import { api } from "@/utils/api";
 import { nanoid } from "nanoid";
+import Loading from "./Loading";
 
 export function LoginDropdown({ children }: PropsWithChildren) {
-  const { data } = api.loginlink.getAll.useQuery({});
+  const { data, isLoading } = api.loginlink.getAll.useQuery({});
 
   return (
     <DropdownMenu>
@@ -34,6 +35,11 @@ export function LoginDropdown({ children }: PropsWithChildren) {
       <DropdownMenuContent className="w-56 z-50">
         <DropdownMenuLabel>Login As</DropdownMenuLabel>
         <DropdownMenuSeparator />
+        {
+          isLoading && <div className="flex items-center justify-center p-2 ">
+            <Loading width={20} height={20}/>
+          </div>
+        }
         <DropdownMenuGroup>
 
           {

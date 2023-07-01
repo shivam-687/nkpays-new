@@ -12,6 +12,7 @@ const extensionTitleMap = {
     GoogleMap: 'google_map',
     TwakTo: 'twak_to',
     Whatsapp: 'whatsapp',
+    GTM: 'google_tag_manager'
 }
 
 const ExtensionPage = () => {
@@ -27,7 +28,7 @@ const ExtensionPage = () => {
 
             <div className='space-y-5 border rounded-xl p-2'>
                 <GoogleMapSetting data={findDataByTitle(extensionTitleMap.GoogleMap) as GoogleMapExtensionOutput}/>
-                <GoogleTagManagerSetting data={findDataByTitle(extensionTitleMap.GoogleMap) as CreateGoogleTagMangerExtensionOutput}/>
+                <GoogleTagManagerSetting data={findDataByTitle(extensionTitleMap.GTM) as CreateGoogleTagMangerExtensionOutput}/>
                 <TwakTooSetting data={findDataByTitle(extensionTitleMap.TwakTo) as TwakTooSettingOutput}/>
                 <WhatsappSetting data={findDataByTitle(extensionTitleMap.Whatsapp) as WhatsappSettingOutput} />
             </div>

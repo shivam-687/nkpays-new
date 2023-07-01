@@ -12,7 +12,7 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export function formateCurrency(num: number){
-  return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3, currency: 'INR' }).format(num)
+  return new Intl.NumberFormat('en-IN', {  currency: 'INR', style: 'currency' }).format(num)
 }
 
 export function formateDate(date: number|Date|undefined|string){

@@ -15,11 +15,17 @@ import LayoutSwitcher from "@/components/layout/LayoutSwitcher";
 import NextNProgress from 'nextjs-progressbar'
 import { DefaultSeo } from 'next-seo';
 import { env } from "@/env.mjs";
+import TagManager from 'react-gtm-module'
+import GoogleTagManagerScript from "@/components/widget/GoogleTagManagerScript";
+import TwakToWidget from "@/components/widget/TwakToWidget";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+  
+
+
   return (
     <SessionProvider session={session}>
       <DefaultSeo
@@ -36,6 +42,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <NextNProgress />
       <ToastContainer/>
       <SiteLoader>
+        <TwakToWidget/>
+        <GoogleTagManagerScript/>
         <LayoutSwitcher>
         <Component {...pageProps} />
         </LayoutSwitcher>

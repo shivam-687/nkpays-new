@@ -11,6 +11,7 @@ import {
 import ContactForm from "../shared/ContactForm"
 import { useEffect, useState } from "react"
 import { Separator } from "../ui/separator";
+import WhatsappButton from "./WhatsappButton";
 
 export function EnquiryWidget() {
     const [open, setOpen] = useState(false);
@@ -42,8 +43,8 @@ export function EnquiryWidget() {
           </DialogDescription>
         </DialogHeader>
         <ContactForm onSubmit={() => handleClose()}/>
-        <Separator className="my-5" />
-        
+        <Separator className=""></Separator>
+        <WhatsappButton/>
       </DialogContent>
     </Dialog>
   )

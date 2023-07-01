@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { api } from '@/utils/api'
 import { toast } from 'react-toastify'
-import { type UpdateExtensionInput, TwakTooSettingOutput, CreateTwakTooSettingSchema, CreateTwakTooSettingInput, UpdateTwakTooSettingInput, UpdateTwakTooSettingSchema, WhatsappSettingOutput, CreateWhatsappSettingInput, UpdateWhatsappSettingInput } from '@/schema/extension.schema'
+import { type UpdateExtensionInput,  WhatsappSettingOutput, CreateWhatsappSettingInput, UpdateWhatsappSettingInput, UpdateWhatsappSettingSchema, CreateWhatsappSettingSchema } from '@/schema/extension.schema'
 
 
 const WhatsappSetting = ({ data }: { data?: WhatsappSettingOutput }) => {
@@ -30,7 +30,7 @@ const WhatsappSetting = ({ data }: { data?: WhatsappSettingOutput }) => {
     const updateExtensionMutation = api.extension.update.useMutation()
     const ctx = api.useContext().extension;
     const form = useForm<CreateWhatsappSettingInput|UpdateWhatsappSettingInput>({
-        resolver: zodResolver(data ? UpdateTwakTooSettingSchema : CreateTwakTooSettingSchema),
+        resolver: zodResolver(data ? UpdateWhatsappSettingSchema : CreateWhatsappSettingSchema),
         defaultValues: data ? { ...data } : { title }
     });
 
@@ -41,7 +41,6 @@ const WhatsappSetting = ({ data }: { data?: WhatsappSettingOutput }) => {
                 await updateExtensionMutation.mutateAsync({ ...values as UpdateExtensionInput });
             } else {
                 await createExtensionMutation.mutateAsync({ ...values as CreateWhatsappSettingInput });
-                
             }
             toast.success('Whatsapp Setting saved')
             void ctx.invalidate()

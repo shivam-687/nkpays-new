@@ -26,7 +26,7 @@ export const ContactConfigRouter = createTRPCRouter({
     }),
 
   getAll: publicProcedure.input(ContactListSchema).query(async({ ctx, input }) => {
-    const res = await ctx.prisma.contact.findMany();
+    const res = await ctx.prisma.contact.findMany({orderBy: {createdAt: 'asc'}});
     return res;
   }),
 

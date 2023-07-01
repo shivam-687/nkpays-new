@@ -13,6 +13,7 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.1.4",
     "@emotion/react": "^11.11.1",
     "@formkit/auto-animate": "1.0.0-beta.6",
     "@hookform/resolvers": "^3.1.1",
@@ -64,6 +65,7 @@
     "react": "18.2.0",
     "react-awesome-reveal": "^4.2.3",
     "react-dom": "18.2.0",
+    "react-gtm-module": "^2.0.11",
     "react-hook-form": "^7.44.3",
     "react-loader-spinner": "^5.3.4",
     "react-modern-drawer": "^1.2.0",
@@ -89,6 +91,7 @@
     "@types/prettier": "^2.7.2",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
+    "@types/react-gtm-module": "^2.0.1",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
     "autoprefixer": "^10.4.14",

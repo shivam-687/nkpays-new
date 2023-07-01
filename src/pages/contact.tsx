@@ -4,13 +4,12 @@ import ContactForm from '@/components/shared/ContactForm'
 import DownloadAppSection from '@/components/shared/DownloadAppSection'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import GoogleMapWidget from '@/components/widget/GoogleMapWidget'
-import { ContactData } from '@/schema/contactConfig.schema'
+import { type ContactData } from '@/schema/contactConfig.schema'
 import { appRouter } from '@/server/api/root'
-import { Contact } from '@prisma/client'
 import { createServerSideHelpers } from '@trpc/react-query/server'
 import { Mail, Phone } from 'lucide-react'
 import { nanoid } from 'nanoid'
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import { type GetServerSidePropsContext, type InferGetServerSidePropsType } from 'next'
 import React from 'react'
 import SuperJSON from 'superjson'
 import { createInnerTRPCContext } from '~/server/api/trpc';
@@ -41,8 +40,6 @@ export async function getServerSideProps(
     });
 
     const res = await helpers.contactInfo.getAll.fetch({})
-
-
 
     return {
         props: {
@@ -115,7 +112,7 @@ const ContactPage = ({ contacts }: InferGetServerSidePropsType<typeof getServerS
                     </div>
                     <div>
                         {
-                            contacts.length > 0 && <ContactCard contact={contacts[1]} />
+                            contacts.length > 0 && <ContactCard contact={contacts[0]} />
                         }
                     </div>
                 </div>
@@ -123,7 +120,7 @@ const ContactPage = ({ contacts }: InferGetServerSidePropsType<typeof getServerS
                     <div>
 
                         {
-                            contacts.length > 1 && <ContactCard contact={contacts[0]} />
+                            contacts.length > 1 && <ContactCard contact={contacts[1]} />
                         }
                     </div>
 

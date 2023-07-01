@@ -31,11 +31,9 @@ export type GoogleMapExtensionOutput = {
 }
 
 export const CreateGoogleTagMangerExtensionSchema = z.object({
-    title: z.string().default('Google Map'),
+    title: z.string().default('google_tag_manager'),
     data: z.object({
-        apiKey: z.string().optional(),
-        latitude: z.string().optional(),
-        longitude: z.string().optional()
+        code: z.string().optional()
     }),
     active: z.boolean().default(true).optional()
 })
