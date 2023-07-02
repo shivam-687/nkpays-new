@@ -60,7 +60,7 @@ const DownloadAppSection = () => {
                 'Application',
             ],
             button: {
-                link: '#',
+                link: 'https://play.google.com/store/apps/details?id=com.nkpaysapp',
                 text: 'Download Now'
             },
             desc: `Nkpays LIte is a company specializes in Mobile, Data Card and Dth recharge technologies.`
@@ -73,7 +73,7 @@ const DownloadAppSection = () => {
                 'From PlayStore'
             ],
             button: {
-                link: '#',
+                link: 'https://play.google.com/store/apps/details?id=com.nkpays.nkpays',
                 text: 'Download Now'
             },
             desc: `BBPS, Booking, Recharges, Bill Payments, FastTag, All in One Place`
@@ -86,7 +86,7 @@ const DownloadAppSection = () => {
                 'Google PlayStore'
             ],
             button: {
-                link: '#',
+                link: 'https://play.google.com/store/apps/details?id=com.nkpaysapp',
                 text: 'Download Now'
             },
             desc: `Nkpays LIte is a company specializes in Mobile, Data Card and Dth recharge technologies.`
@@ -99,7 +99,7 @@ const DownloadAppSection = () => {
                 'From PlayStore'
             ],
             button: {
-                link: '#',
+                link: 'https://play.google.com/store/apps/details?id=com.nkpays.nkpays',
                 text: 'Download Now'
             },
             desc: `BBPS, Booking, Recharges, Bill Payments, FastTag, All in One Place.`

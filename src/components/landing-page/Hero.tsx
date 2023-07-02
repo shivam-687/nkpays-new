@@ -68,7 +68,7 @@ const Hero = () => {
           <animated.p className='mt-2 text-center md:text-left' style={fadeRight}>{content.desc}</animated.p>
           <div className='flex gap-4 mt-5 justify-center lg:justify-start' >
             <animated.div style={popTrail[0]}><LoginDropdown /></animated.div>
-            <animated.div style={popTrail[1]}><AppDownloadButton /></animated.div>
+            <animated.div style={popTrail[1]}><AppDownloadButton href='https://play.google.com/store/apps/details?id=com.nkpaysapp' /></animated.div>
           </div>
         </div>
         <div className='relative '>
