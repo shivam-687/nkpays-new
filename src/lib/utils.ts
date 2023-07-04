@@ -43,3 +43,9 @@ export function convertNullToUndefined(obj: any): any {
   return obj;
 }
  
+
+
+export async function copyToClipboard (data: string) {
+  return await navigator.clipboard.writeText(data);
+
+}

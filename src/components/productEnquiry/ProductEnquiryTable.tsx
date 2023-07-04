@@ -9,7 +9,7 @@ import dayjs from 'dayjs'
 import { type ProductEnquiryListItem } from '@/schema/productEnquiry'
 import Link from 'next/link'
 import { Button } from '../ui/button'
-import { Eye, MoreHorizontal, View } from 'lucide-react'
+import { Copy, Eye, MoreHorizontal, View } from 'lucide-react'
 import DeleteProductEnquiryButton from './ProductEnquiryDeleteButton';
 import {
     DropdownMenu,
@@ -24,6 +24,7 @@ import { api } from '@/utils/api'
 import { toast } from 'react-toastify'
 import ProductEnquiryDialog from './ProductEnquiryFormDialog'
 import ProductEnquiryDrawer from './ProductEnquiryDrawer'
+import CopyButton from '../shared/CopyButton'
 
 export type ProductTableProps = {
     data: ProductEnquiryListItem[],
@@ -65,7 +66,27 @@ const Columns: ColumnDef<ProductEnquiryListItem>[] = [
     },
     {
         accessorKey: 'email',
-        header: 'Email'
+        header: 'Email',
+        cell({ row }) {
+            return <div className='flex items-center justify-between'>
+                <span>{row.original.email}</span>
+                {
+                    row.original.email && <CopyButton size={'sm'} text={row.original.email}/>
+                }
+            </div>
+        },
+    },
+    {
+        accessorKey: 'phone',
+        header: 'Phone',
+        cell({ row }) {
+            return <div className='flex items-center justify-between'>
+                <span>{row.original.phone}</span>
+                {
+                    row.original.phone && <CopyButton  size={'sm'} text={row.original.phone}/>
+                }
+            </div>
+        },
     },
     {
         accessorKey: 'product',

@@ -18,22 +18,22 @@ const Footer = () => {
     const socialLink = [
         {
             icon: <FacebookIcon className='w-6 h-6 '/>,
-            link: '#',
+            link: 'https://www.facebook.com/nkpays/',
             name: 'facbook'
         },
         {
             icon: <TwitterIcon className='w-6 h-6 '/>,
-            link: '#',
+            link: 'https://twitter.com/NKPAYS',
             name: 'twitter'
         },
         {
             icon: <Linkedin className='w-6 h-6 '/>,
-            link: '#',
+            link: 'https://www.instagram.com/nkpayspvtltd/',
             name: 'linkedin'
         },
         {
             icon: <Instagram className='w-6 h-6'/>,
-            link: '#',
+            link: 'https://www.linkedin.com/in/nkpayspvtltd/',
             name: 'instagram'
         },
     ];
@@ -41,19 +41,23 @@ const Footer = () => {
     const quickLinks = [
         {
             lable: 'Home',
-            link: '#'
+            link: '/'
         },
         {
             lable: 'About Us',
-            link: '#'
+            link: '/about'
         },
         {
             lable: 'Contact Us',
-            link: '#'
+            link: '/contact'
         },
         {
             lable: 'Services',
-            link: '#'
+            link: '/shop'
+        },
+        {
+            lable: 'Shop',
+            link: '/shop'
         },
     ]
     const legals = [
@@ -80,7 +84,7 @@ const Footer = () => {
                 <div className='flex gap-2'>
                     {
                         socialLink.map(sc => {
-                            return <span key={nanoid()} className='rounded-lg border border-primary hover:bg-primary text-primary hover:text-primary-foreground transition-all p-1'>{sc.icon}</span>
+                            return <a href={sc.link} key={nanoid()} className='rounded-lg border border-primary hover:bg-primary text-primary hover:text-primary-foreground transition-all p-1'>{sc.icon}</a>
                         })
                     }
                 </div>

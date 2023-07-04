@@ -16,6 +16,7 @@ import Link from 'next/link'
 import DeleteContactQueryButton from '../DeleteContactQueryButton'
 import { Checkbox } from '@/components/ui/checkbox'
 import ContactQueryDrawer from '../ContactQueryDrawer'
+import CopyButton from '@/components/shared/CopyButton'
 
 export const ContactQueryColumns: ColumnDef<ContactQuery>[] = [
     {
@@ -50,10 +51,25 @@ export const ContactQueryColumns: ColumnDef<ContactQuery>[] = [
     {
         accessorKey: "email",
         header: "Email",
+        cell({ row }) {
+            return <div className='flex items-center justify-between'>
+                <span>{row.original.email}</span>
+                <CopyButton  size={'sm'} text={row.original.email}/>
+                
+            </div>
+        },
     },
     {
         accessorKey: "phone",
         header: "Phone",
+        cell({ row }) {
+            return <div className='flex items-center justify-between'>
+                <span>{row.original.phone}</span>
+                {
+                    row.original.phone && <CopyButton  size={'sm'} text={row.original.phone}/>
+                }
+            </div>
+        },
     },
     {
         accessorKey: "createdAt",
