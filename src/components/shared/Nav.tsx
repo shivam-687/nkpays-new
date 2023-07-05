@@ -123,8 +123,8 @@ const Nav = () => {
                 { lable: 'Domestice Money Transfer', link: '/services/domestice-money-transfer' },
               ] },
               { link: '/about', lable: 'About' },
-              { link: '/Contact', lable: 'Contact' },
-              { link: '/Shop', lable: 'Shop' },
+              { link: '/contact', lable: 'Contact' },
+              { link: '/shop', lable: 'Shop' },
             ]} />
         </div>
       </Drawer>
