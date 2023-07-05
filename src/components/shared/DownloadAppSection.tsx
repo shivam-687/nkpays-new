@@ -34,7 +34,7 @@ const Slide = ({ imageUrl, link, titleArray = [], desc }: { imageUrl: string, li
                             <p className='mt-4'>{desc}</p>
                             </Fade>
                         </div>
-                        <Fade delay={500} className="mt-4"><AppDownloadButton /></Fade>
+                        <Fade delay={500} className="mt-4"><a href={link||'#'}><AppDownloadButton /></a></Fade>
                     </div>
 
                     <div className='relative w-full pt-10 '>
@@ -122,7 +122,7 @@ const DownloadAppSection = () => {
             {
                 slideContent.map(ct => {
                     return <SwiperSlide key={nanoid()}>
-                        <Slide imageUrl={ct.image} titleArray={ct.titleArray} desc={ct.desc}/>
+                        <Slide link={ct.button.link} imageUrl={ct.image} titleArray={ct.titleArray} desc={ct.desc}/>
                     </SwiperSlide>
                 })
             }
