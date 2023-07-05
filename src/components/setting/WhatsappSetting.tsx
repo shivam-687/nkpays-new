@@ -116,9 +116,9 @@ const WhatsappSetting = ({ data }: { data?: WhatsappSettingOutput }) => {
                                 name="data.greetMessage"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Greet Message</FormLabel>
+                                        <FormLabel>Custom Message</FormLabel>
                                         <FormControl>
-                                            <Input  {...field} />
+                                            <Input placeholder='This message is autofilled when user click to whatsapp button on site.'  {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
