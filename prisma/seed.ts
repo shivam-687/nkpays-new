@@ -150,10 +150,10 @@ export async function seedContact () {
 
 async function main() {
     await SeedContactQuery();
-    // await seedProduct();
-    // await seedProductEnquiry()
-    // await seedContact()
-    // await seedLoginLinks()
+    await seedProduct();
+    await seedProductEnquiry()
+    await seedContact()
+    await seedLoginLinks()
 }
 
 main()
