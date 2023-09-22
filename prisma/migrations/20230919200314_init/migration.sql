@@ -144,6 +144,45 @@ CREATE TABLE "Extension" (
     CONSTRAINT "Extension_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Page" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "slug" TEXT,
+    "content" TEXT,
+    "meta" JSONB,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Page_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "SiteConfig" (
+    "id" SERIAL NOT NULL,
+    "socials" JSONB,
+    "contacts" JSONB,
+
+    CONSTRAINT "SiteConfig_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Leads" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "phone" TEXT,
+    "shopName" TEXT NOT NULL,
+    "aadhaarNo" TEXT NOT NULL,
+    "pancard" TEXT NOT NULL,
+    "address" TEXT,
+    "utrNo" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Leads_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Account_provider_providerAccountId_key" ON "Account"("provider", "providerAccountId");
 
@@ -164,6 +203,9 @@ CREATE UNIQUE INDEX "ContactQuery_email_key" ON "ContactQuery"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ProductEnquiry_email_key" ON "ProductEnquiry"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Page_name_key" ON "Page"("name");
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

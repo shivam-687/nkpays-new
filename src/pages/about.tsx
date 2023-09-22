@@ -58,31 +58,28 @@ const content = {
 const AboutPage = () => {
 
     const title = '';
-  const desc = ''; 
-  
+    const desc = '';
+
     return (
         <>
-        <NextSeo
-        title={title}
-        description={desc}
-        openGraph={{
-          title: title,
-          description: desc,
-          url: env.NEXT_PUBLIC_SITE_URL,
-          images: []
-        }}
-        twitter={{
-          cardType: 'summary_large_image',
-        }}
-      />
+            <NextSeo
+                title={title}
+                description={desc}
+                openGraph={{
+                    title: title,
+                    description: desc,
+                    url: env.NEXT_PUBLIC_SITE_URL,
+                    images: []
+                }}
+                twitter={{
+                    cardType: 'summary_large_image',
+                }}
+            />
             <section className='h-64 bg-primary/30  relative'>
                 <div className='grid place-content-center z-20 backdrop-blur-lg w-full h-full'><h1 className='text-6xl font-bold'>About Us</h1></div>
-
                 <div className='w-20 h-20 rounded-full top-10 left-20 absolute bg-primary -z-20' style={{}}></div>
                 <div className='w-20 h-20 rounded-full top-20 right-1/2 absolute bg-primary -z-20' style={{}}></div>
                 <div className='w-20 h-20 rounded-full left-1/3 bottom-0 absolute bg-primary -z-20' style={{}}></div>
-
-
             </section>
             <Section>
                 <div className='mx-auto max-w-6xl px-4 space-y-5'>

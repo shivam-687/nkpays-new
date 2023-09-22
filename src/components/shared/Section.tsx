@@ -37,7 +37,7 @@ const Section = ({
                 &&
                 <>
                     {
-                        sectionTitle && <div className='overflow-hidden mb-3'>
+                        sectionTitle && <div className='overflow-hidden mb-3 px-5'>
                             <Fade triggerOnce delay={200} direction='up'><SectionTitle className={titleClassnames}>{sectionTitle}</SectionTitle></Fade>
                         </div>
                     }

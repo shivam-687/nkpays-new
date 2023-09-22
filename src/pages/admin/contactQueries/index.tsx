@@ -10,8 +10,8 @@ import { toast } from 'react-toastify'
 const ContactQueryPage = () => {
   const [pagination, setPagination] = useState<PaginateOptions|undefined>({page: 1, perPage: 10})
   const {data: queries, isLoading} = api.contact_query.getAll.useQuery({pagination});
-  const deleteManyMutation = api.product.deleteMany.useMutation();
-    const ctx = api.useContext().product;
+  const deleteManyMutation = api.contact_query.deleteMany.useMutation();
+    const ctx = api.useContext().contact_query;
 
     async function deleteMany(ids: number[]) {
         try {

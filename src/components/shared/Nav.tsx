@@ -87,6 +87,7 @@ const Nav = () => {
             <NavLink href={'/about'}>About Us</NavLink>
             <NavLink href={'/shop'}>Shop</NavLink>
             <NavLink href={'/contact'}>Contact</NavLink>
+            <NavLink href={'/plans'}>Plans</NavLink>
           </div>
         </div>
 
@@ -125,6 +126,7 @@ const Nav = () => {
               { link: '/about', lable: 'About' },
               { link: '/contact', lable: 'Contact' },
               { link: '/shop', lable: 'Shop' },
+              { link: '/plans', lable: 'Plans' },
             ]} />
         </div>
       </Drawer>

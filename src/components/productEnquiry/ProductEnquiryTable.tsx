@@ -9,7 +9,7 @@ import dayjs from 'dayjs'
 import { type ProductEnquiryListItem } from '@/schema/productEnquiry'
 import Link from 'next/link'
 import { Button } from '../ui/button'
-import { Copy, Eye, MoreHorizontal, View } from 'lucide-react'
+import {MoreHorizontal } from 'lucide-react'
 import DeleteProductEnquiryButton from './ProductEnquiryDeleteButton';
 import {
     DropdownMenu,
@@ -22,7 +22,6 @@ import {
 import { Checkbox } from '../ui/checkbox'
 import { api } from '@/utils/api'
 import { toast } from 'react-toastify'
-import ProductEnquiryDialog from './ProductEnquiryFormDialog'
 import ProductEnquiryDrawer from './ProductEnquiryDrawer'
 import CopyButton from '../shared/CopyButton'
 

@@ -150,7 +150,58 @@ model Page {
 }
 
 model SiteConfig {
-    id Int @id @default(autoincrement())
-    socials Json?
+    id       Int   @id @default(autoincrement())
+    socials  Json?
     contacts Json?
+}
+
+model Plan {
+    id        Int      @id @default(autoincrement())
+    title     String
+    desc      String?
+    order     Int      @default(autoincrement())
+    price     String?
+    schemes   Scheme[]
+    enabled   Boolean  @default(true)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt()
+    Leads     Leads[]
+}
+
+model Scheme {
+    id      Int     @id @default(autoincrement())
+    name    String
+    desc    String?
+    price   String?
+    order   Int     @default(autoincrement())
+    Plan    Plan?   @relation(fields: [planId], references: [id], onDelete: Cascade)
+    planId  Int?
+    Leads   Leads[]
+    enabled Boolean @default(true)
+}
+
+model Leads {
+    id        Int        @id @default(autoincrement())
+    schemeId  Int?
+    planId    Int?
+    name      String
+    email     String
+    phone     String?
+    shopName  String
+    aadhaarNo String
+    pancard   String
+    address   String?
+    pincode   String?
+    utrNo     String?
+    status    LeadStatus @default(OPEN)
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt()
+    Scheme    Scheme?    @relation(fields: [schemeId], references: [id])
+    Plan      Plan?      @relation(fields: [planId], references: [id])
+}
+
+enum LeadStatus {
+    OPEN
+    CLOSED
+    DECLINED
 }

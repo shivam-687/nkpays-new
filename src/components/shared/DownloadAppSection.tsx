@@ -1,12 +1,11 @@
 import React from 'react'
 import Section from './Section'
-import Logo from './Logo'
 import AppDownloadButton from './AppDownloadButton'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { nanoid } from 'nanoid'
 import { Autoplay, EffectFade } from 'swiper'
-import { Fade, Flip, Roll } from 'react-awesome-reveal'
+import { Fade } from 'react-awesome-reveal'
 
 
 const Slide = ({ imageUrl, link, titleArray = [], desc }: { imageUrl: string, link?: string, titleArray: string[], desc: string }) => {
@@ -34,7 +33,7 @@ const Slide = ({ imageUrl, link, titleArray = [], desc }: { imageUrl: string, li
                             <p className='mt-4'>{desc}</p>
                             </Fade>
                         </div>
-                        <Fade delay={500} className="mt-4"><a href={link||'#'}><AppDownloadButton /></a></Fade>
+                        <Fade delay={500} className="mt-4"><AppDownloadButton href={link||'#'} /></Fade>
                     </div>
 
                     <div className='relative w-full pt-10 '>

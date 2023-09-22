@@ -37,7 +37,7 @@ const MobileNav = ({
                         {
                             link.children
                                 ?
-                                <div className="px-4">
+                                <div className="px-4" key={nanoid()}>
                                     <Accordion type="single" collapsible>
                                     <AccordionItem value="item-1">
                                         <AccordionTrigger>{link.lable}</AccordionTrigger>

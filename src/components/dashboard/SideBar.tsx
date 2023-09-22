@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import React, { PropsWithChildren, ReactElement, ReactNode } from 'react'
+import React, { type PropsWithChildren, type ReactElement } from 'react';
 import Logo from '../shared/Logo'
-import { Archive, BadgeDollarSign, File, LayoutDashboard, Link2, LucidePhoneCall, Mail, MessageSquareDashed, Settings, ShoppingBag } from 'lucide-react'
+import { Archive, BadgeDollarSign, File, LayoutDashboard, Link2, Mail, MessageSquareDashed, Settings, ShoppingBag, Sparkles, Users } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { cn } from '@/lib/utils'
@@ -74,6 +74,16 @@ const SideBar = ({
             link: '/admin/page',
             icon: <File />
         },
+        {
+            lable: 'Plans',
+            link: '/admin/plans',
+            icon: <Sparkles />
+        },
+        {
+            lable: 'Leads',
+            link: '/admin/leads',
+            icon: <Users />
+        },
     ]
     return (
         <>
@@ -92,7 +102,6 @@ const SideBar = ({
                                         )
                                     })
                                 }
-
                             </ul >
                             <div className="space-y-2 pt-2">
                                 <SidebarLink link={'#'} icon={<BadgeDollarSign />}>Whatsapp Marketing</SidebarLink>
